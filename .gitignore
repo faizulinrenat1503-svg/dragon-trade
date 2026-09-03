@@ -1,0 +1,10 @@
+# Reference/working materials — not part of the site itself
+reference/
+hero-референс/
+hero-сейчас/
+_pb-*.png
+_perblock*.png
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db
