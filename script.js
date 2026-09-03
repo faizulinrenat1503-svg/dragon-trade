@@ -42,4 +42,22 @@
       form.reset();
     });
   }
+
+  // Magnetic buttons — only for fine pointers, never on touch, never when
+  // the user asked for reduced motion.
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (finePointer && !reduceMotion) {
+    document.querySelectorAll('.btn').forEach(function(btn){
+      var strength = 0.35;
+      btn.addEventListener('mousemove', function(e){
+        var r = btn.getBoundingClientRect();
+        var x = (e.clientX - r.left - r.width / 2) * strength;
+        var y = (e.clientY - r.top - r.height / 2) * strength;
+        btn.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
+      });
+      btn.addEventListener('mouseleave', function(){
+        btn.style.transform = '';
+      });
+    });
+  }
 })();
