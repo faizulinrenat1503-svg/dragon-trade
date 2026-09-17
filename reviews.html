@@ -8,23 +8,10 @@
 <link rel="icon" href="images/logo/dragon-logo-32.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<div class="bg-fixed" aria-hidden="true">
-  <div class="bg-base"></div>
-  <div class="bg-sky"></div>
-  <div class="bg-horizon"></div>
-  <div class="bg-beam bg-beam--1"></div>
-  <div class="bg-beam bg-beam--2"></div>
-  <div class="bg-plane-wrap">
-    <div class="bg-plane-glow"></div>
-    <div class="bg-plane"></div>
-    <div class="bg-sheen"></div>
-  </div>
-</div>
 
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
@@ -76,80 +63,267 @@
 
 <main>
 
-  <!-- ================= PAGE HERO ================= -->
-  <section class="page-hero" id="top">
+  <!-- ================= REVIEWS HERO ================= -->
+  <section class="reviews-hero section-pad" id="top">
     <div class="container">
-      <div class="page-hero-panel reveal">
-        <span class="eyebrow">Отзывы</span>
-        <h1>Что говорят <em>наши клиенты</em></h1>
-        <span class="gold-line"></span>
-        <p>Реальные истории клиентов, которые уже возят грузы через нас — от текстиля до промышленного оборудования.</p>
+      <div class="reviews-hero__grid">
+        <div class="reviews-hero__copy reveal">
+          <span class="eyebrow">Отзывы</span>
+          <h1>Что говорят <em>наши клиенты</em></h1>
+          <span class="gold-line"></span>
+          <p>Реальные истории клиентов, которые уже возят грузы через нас — от текстиля до промышленного оборудования. Нам доверяют, потому что мы решаем задачи, а не создаём проблемы.</p>
+
+          <div class="reviews-stats">
+            <div class="reviews-stat">
+              <span class="reviews-stat__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 5 18.5V20"/><circle cx="9.5" cy="8.5" r="3.2"/><path d="M16 8.2a2.8 2.8 0 1 1 1.2 5.3"/><path d="M19.5 20v-1.3a3.2 3.2 0 0 0-2-3"/></svg></span>
+              <div><strong>500+</strong><span>довольных клиентов</span></div>
+            </div>
+            <div class="reviews-stat">
+              <span class="reviews-stat__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 20 6v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6Z"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9"/></svg></span>
+              <div><strong>98%</strong><span>обращаются повторно</span></div>
+            </div>
+            <div class="reviews-stat">
+              <span class="reviews-stat__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.7 5.6 6.1.6-4.6 4.1 1.3 6-5.5-3.1-5.5 3.1 1.3-6-4.6-4.1 6.1-.6Z"/></svg></span>
+              <div><strong>4,9</strong><span>средняя оценка наших услуг</span></div>
+            </div>
+          </div>
+
+          <div class="reviews-avatars">
+            <span class="reviews-avatar"><img src="images/review-marina.jpg" alt="" loading="lazy"></span>
+            <span class="reviews-avatar"><img src="images/review-artem.jpg" alt="" loading="lazy"></span>
+            <span class="reviews-avatar"><img src="images/review-dinara.jpg" alt="" loading="lazy"></span>
+            <span class="reviews-avatar"><img src="images/review-igor.jpg" alt="" loading="lazy"></span>
+            <span class="reviews-avatar"><img src="images/review-elena.jpg" alt="" loading="lazy"></span>
+            <span class="reviews-avatar reviews-avatar--more">+7</span>
+            <span class="reviews-note">Спасибо за доверие!</span>
+          </div>
+        </div>
+
+        <div class="reviews-hero__visual reveal">
+          <div class="reviews-carousel" data-reviews-carousel>
+            <div class="reviews-carousel__stack">
+              <article class="reviews-card" data-index="0">
+                <div class="reviews-card__head">
+                  <span class="reviews-card__avatar"><img src="images/review-marina.jpg" alt="" loading="lazy"></span>
+                  <div>
+                    <strong>Марина Соколова</strong>
+                    <span>Текстиль, одежда, обувь</span>
+                  </div>
+                  <svg class="reviews-card__quote" viewBox="0 0 24 24" fill="currentColor"><path d="M7 8c-2.2 0-4 1.8-4 4v4h4v-4H5c0-1.1.9-2 2-2V8Zm10 0c-2.2 0-4 1.8-4 4v4h4v-4h-2c0-1.1.9-2 2-2V8Z"/></svg>
+                </div>
+                <div class="review-stars">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+                </div>
+                <p class="review-text">Работаем с «Дракон Трейд» больше двух лет — возим одежду и обувь из Гуанчжоу. Ни разу не было проблем с таможней, всегда в срок. Отдельное спасибо менеджеру за оперативность и внимание к деталям.</p>
+                <div class="reviews-card__tags">
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5-9 5-9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>Текстиль</span>
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.3 7-12a7 7 0 1 0-14 0c0 5.7 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>Китай → Россия</span>
+                  <span class="reviews-card__status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>Поставка выполнена</span>
+                </div>
+              </article>
+
+              <article class="reviews-card" data-index="1">
+                <div class="reviews-card__head">
+                  <span class="reviews-card__avatar"><img src="images/review-artem.jpg" alt="" loading="lazy"></span>
+                  <div>
+                    <strong>Артём Волков</strong>
+                    <span>Промышленное оборудование</span>
+                  </div>
+                  <svg class="reviews-card__quote" viewBox="0 0 24 24" fill="currentColor"><path d="M7 8c-2.2 0-4 1.8-4 4v4h4v-4H5c0-1.1.9-2 2-2V8Zm10 0c-2.2 0-4 1.8-4 4v4h4v-4h-2c0-1.1.9-2 2-2V8Z"/></svg>
+                </div>
+                <div class="review-stars">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+                </div>
+                <p class="review-text">Перевели все поставки оборудования на них после того, как предыдущий подрядчик задержал груз на таможне на месяц. С «Дракон Трейд» такого не было ни разу.</p>
+                <div class="reviews-card__tags">
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5-9 5-9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>Оборудование</span>
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.3 7-12a7 7 0 1 0-14 0c0 5.7 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>Китай → Россия</span>
+                  <span class="reviews-card__status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>Поставка выполнена</span>
+                </div>
+              </article>
+
+              <article class="reviews-card" data-index="2">
+                <div class="reviews-card__head">
+                  <span class="reviews-card__avatar"><img src="images/review-dinara.jpg" alt="" loading="lazy"></span>
+                  <div>
+                    <strong>Динара Ахметова</strong>
+                    <span>Одежда</span>
+                  </div>
+                  <svg class="reviews-card__quote" viewBox="0 0 24 24" fill="currentColor"><path d="M7 8c-2.2 0-4 1.8-4 4v4h4v-4H5c0-1.1.9-2 2-2V8Zm10 0c-2.2 0-4 1.8-4 4v4h4v-4h-2c0-1.1.9-2 2-2V8Z"/></svg>
+                </div>
+                <div class="review-stars">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+                </div>
+                <p class="review-text">Отдельное спасибо за помощь с «Честным знаком» — сами бы разбирались в разы дольше. Быстро, понятно, без лишней бюрократии.</p>
+                <div class="reviews-card__tags">
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5-9 5-9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>Одежда</span>
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.3 7-12a7 7 0 1 0-14 0c0 5.7 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>Китай → Россия</span>
+                  <span class="reviews-card__status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>Поставка выполнена</span>
+                </div>
+              </article>
+            </div>
+
+            <div class="reviews-carousel__nav">
+              <button type="button" class="reviews-carousel__arrow" data-reviews-prev aria-label="Предыдущий отзыв">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+              </button>
+              <div class="reviews-carousel__dots" data-reviews-dots></div>
+              <button type="button" class="reviews-carousel__arrow" data-reviews-next aria-label="Следующий отзыв">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+              </button>
+              <span class="reviews-carousel__count" data-reviews-count>1 / 3</span>
+              <span class="reviews-carousel__more">Больше<br>историй<svg viewBox="0 0 40 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4c10 14 22 14 34 4"/><path d="M27 5.5l9 2.5-2.5 9"/></svg></span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= REVIEWS ================= -->
-  <section class="section-pad">
+  <!-- ================= CASES ================= -->
+  <section class="section-pad" id="cases">
     <div class="container">
-      <div class="review-grid reveal">
-        <article class="review-card">
-          <svg class="review-quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M7 8c-2.2 0-4 1.8-4 4v4h4v-4H5c0-1.1.9-2 2-2V8Zm10 0c-2.2 0-4 1.8-4 4v4h4v-4h-2c0-1.1.9-2 2-2V8Z"/></svg>
-          <p class="review-text">Работаем с «Дракон Трейд» больше двух лет — возим одежду и обувь из Гуанчжоу. Ни разу не было проблем с таможней, всегда в срок.</p>
-          <div class="review-stars">
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+      <div class="section-head section-head--split reveal">
+        <div>
+          <span class="eyebrow">Кейсы</span>
+          <h2>За отзывами — <em>реальные поставки</em></h2>
+          <span class="gold-line"></span>
+          <p>Каждая история — это конкретный результат. Мы не просто перевозим грузы, мы помогаем бизнесу расти.</p>
+        </div>
+        <a href="#top" class="link-arrow">Смотреть все кейсы <span>→</span></a>
+      </div>
+
+      <div class="cases-grid">
+        <article class="case-card case-card--shade-a reveal">
+          <div class="case-card__photo">
+            <span class="case-card__badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4l3 2 3-2 3 3-2 2v9a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-9L6 7l3-3Z"/></svg></span>
           </div>
-          <div class="review-footer">
-            <strong>Марина Соколова</strong>
-            <span>ООО «ТекстильОпт»</span>
+          <div class="case-card__body">
+            <div class="case-card__head">
+              <span class="case-card__num">01</span>
+              <div>
+                <strong>Текстиль и одежда</strong>
+                <span class="case-card__route">Гуанчжоу → Москва</span>
+              </div>
+            </div>
+            <div class="case-card__stats">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>24 дня</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M8 5h8l2 14H6L8 5Z"/></svg>2,4 тонны</span>
+            </div>
+            <p class="case-card__client"><strong>Клиент:</strong> Марина Соколова</p>
+            <p class="case-card__desc">Регулярные поставки одежды и обуви. Полное сопровождение: логистика, таможня, маркировка.</p>
+            <button type="button" class="btn btn-solid btn-sm" data-jump-review="0">Читать отзыв <span>→</span></button>
           </div>
         </article>
 
-        <article class="review-card">
-          <svg class="review-quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M7 8c-2.2 0-4 1.8-4 4v4h4v-4H5c0-1.1.9-2 2-2V8Zm10 0c-2.2 0-4 1.8-4 4v4h4v-4h-2c0-1.1.9-2 2-2V8Z"/></svg>
-          <p class="review-text">Перевели все поставки оборудования на них после того, как предыдущий подрядчик задержал груз на таможне на месяц. С «Дракон Трейд» такого не было ни разу.</p>
-          <div class="review-stars">
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+        <article class="case-card case-card--shade-b reveal">
+          <div class="case-card__photo">
+            <span class="case-card__badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></span>
           </div>
-          <div class="review-footer">
-            <strong>Артём Волков</strong>
-            <span>Менеджер по закупкам, «ПромТехСнаб»</span>
+          <div class="case-card__body">
+            <div class="case-card__head">
+              <span class="case-card__num">02</span>
+              <div>
+                <strong>Промышленное оборудование</strong>
+                <span class="case-card__route">Шэньчжэнь → Казань</span>
+              </div>
+            </div>
+            <div class="case-card__stats">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>31 день</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M8 5h8l2 14H6L8 5Z"/></svg>12 тонн</span>
+            </div>
+            <p class="case-card__client"><strong>Клиент:</strong> Артём Волков</p>
+            <p class="case-card__desc">Поставка производственной линии. Таможенное оформление и доставка до склада клиента.</p>
+            <button type="button" class="btn btn-solid btn-sm" data-jump-review="1">Читать отзыв <span>→</span></button>
           </div>
         </article>
 
-        <article class="review-card">
-          <svg class="review-quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M7 8c-2.2 0-4 1.8-4 4v4h4v-4H5c0-1.1.9-2 2-2V8Zm10 0c-2.2 0-4 1.8-4 4v4h4v-4h-2c0-1.1.9-2 2-2V8Z"/></svg>
-          <p class="review-text">Отдельное спасибо за помощь с «Честным знаком» — сами бы разбирались в разы дольше. Быстро, понятно, без лишней бюрократии.</p>
-          <div class="review-stars">
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6Z"/></svg>
+        <article class="case-card case-card--shade-c reveal">
+          <div class="case-card__photo">
+            <span class="case-card__badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5-9 5-9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></span>
           </div>
-          <div class="review-footer">
-            <strong>Динара Ахметова</strong>
-            <span>Основатель бренда «Ledяная»</span>
+          <div class="case-card__body">
+            <div class="case-card__head">
+              <span class="case-card__num">03</span>
+              <div>
+                <strong>Потребительские товары</strong>
+                <span class="case-card__route">Гуанчжоу → Новосибирск</span>
+              </div>
+            </div>
+            <div class="case-card__stats">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>27 дней</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M8 5h8l2 14H6L8 5Z"/></svg>8 тонн</span>
+            </div>
+            <p class="case-card__client"><strong>Клиент:</strong> Динара Ахметова</p>
+            <p class="case-card__desc">Консолидация сборных грузов. Проверка, упаковка, маркировка «Честный знак».</p>
+            <button type="button" class="btn btn-solid btn-sm" data-jump-review="2">Читать отзыв <span>→</span></button>
           </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ================= CTA ================= -->
+  <!-- ================= WHY THEY TRUST US ================= -->
   <section class="section-pad">
     <div class="container">
-      <div class="page-cta reveal">
-        <h2>Хотите стать следующим?</h2>
-        <p>Оставьте заявку — рассчитаем стоимость и сроки доставки в течение дня.</p>
-        <a href="index.html#contact" class="btn btn-solid">Оставить заявку <span>→</span></a>
+      <span class="eyebrow reveal">Почему нам доверяют</span>
+      <div class="trust-row reveal">
+        <div class="trust-item">
+          <span class="trust-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3 8.5-7 10-4-1.5-7-5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <div><strong>Честная работа</strong><span>и прозрачные условия</span></div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg></span>
+          <div><strong>Полный цикл</strong><span>от поставщика до вашего склада</span></div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="3" y="13" width="4" height="6" rx="1.4"/><rect x="17" y="13" width="4" height="6" rx="1.4"/><path d="M19 19v1a2 2 0 0 1-2 2h-3"/></svg></span>
+          <div><strong>Личный менеджер</strong><span>на всех этапах</span></div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+          <div><strong>Соблюдаем сроки</strong><span>и берём ответственность</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STORY CTA ================= -->
+  <section class="section-pad">
+    <div class="container">
+      <div class="story-cta reveal">
+        <div class="story-cta__inner">
+          <div class="story-cta__copy">
+            <span class="eyebrow">Начать сотрудничество</span>
+            <h2>Следующая история <em>может быть вашей</em></h2>
+            <p>Расскажите, что нужно привезти из Китая — остальное возьмём на себя.</p>
+            <div class="story-cta__actions">
+              <a href="index.html#contact" class="btn btn-solid">Рассчитать доставку <span>→</span></a>
+              <div class="story-cta__bullets">
+                <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>Быстрый ответ</span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 1 3 6.2L4 20l1.1-3.3A7.9 7.9 0 0 1 4 12Z"/></svg>Бесплатная консультация</span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h13"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>Индивидуальный расчёт</span>
+              </div>
+            </div>
+          </div>
+          <div class="story-cta__mark">
+            <img src="images/logo/dragon-logo-256.png" alt="">
+            <strong>Дракон Трейд</strong>
+            <span>Надёжные поставки больших возможностей</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -159,23 +333,41 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-inner">
-      <a href="index.html" class="footer-brand">
-        <img src="images/logo/dragon-logo-256.png" alt="" class="footer-brand-logo">
-        <span>Дракон Трейд</span>
-      </a>
-      <nav class="footer-links" aria-label="Ссылки в подвале">
+      <div class="footer-brand-col">
+        <a href="index.html" class="footer-brand">
+          <img src="images/logo/dragon-logo-256.png" alt="" class="footer-brand-logo">
+          <span>Дракон Трейд</span>
+        </a>
+        <p class="footer-tagline">Надёжные поставки больших возможностей</p>
+      </div>
+      <nav class="footer-nav-col" aria-label="Услуги">
+        <strong>Услуги</strong>
         <a href="index.html#services">Услуги</a>
         <a href="index.html#delivery">Доставка</a>
         <a href="index.html#process">Как работаем</a>
         <a href="index.html#control">Контроль</a>
+      </nav>
+      <nav class="footer-nav-col" aria-label="О компании">
+        <strong>О компании</strong>
         <a href="about.html">О нас</a>
         <a href="reviews.html">Отзывы</a>
         <a href="index.html#contact">Контакты</a>
       </nav>
+      <div class="footer-contact-col">
+        <a class="footer-phone" href="tel:+79990000000">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0 8.3 6.7 15 15 15l3-3.6-5.4-2.2-1.6 2.1a12 12 0 0 1-7.3-7.3l2.1-1.6L7.6 2 4 5Z"/></svg>
+          <span><strong>+7 (999) 000-00-00</strong><small>Ежедневно 9:00–20:00</small></span>
+        </a>
+        <div class="footer-social">
+          <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 3.5 2.7 10.8c-1 .4-1 1.8.1 2.1l4.6 1.4 1.8 5.6c.3.9 1.4 1.1 2 .4l2.6-2.8 4.8 3.6c.8.6 2 .2 2.2-.8l3-16.3c.2-1.1-.9-2-1.9-1.6ZM8.6 14l-1.1-3.5 9.8-6-7 6.9c-.3.3-.5.6-.6 1l-1.1 1.6Z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.4A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 0 1 7 12.5l-.3.5.9 3.2-3.3-.9-.5.3A8.2 8.2 0 1 1 12 3.8Zm-3.1 4.3c-.2 0-.5 0-.7.3-.2.2-.9.9-.9 2.1s.9 2.4 1.1 2.6c.1.1 1.8 2.9 4.5 3.9 2.2.9 2.6.7 3.1.6.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3l-1.8-.9c-.2-.1-.4-.1-.6.1l-.7 1c-.1.2-.3.2-.5.1-.6-.3-1.6-.9-2.4-1.6-.7-.6-1.2-1.5-1.4-1.7-.1-.2 0-.4.1-.5l.5-.6c.1-.2.1-.4 0-.5l-.8-1.9c-.1-.2-.3-.4-.6-.4Z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 8.4s-.2-1.5-.8-2.2c-.8-.8-1.7-.8-2.1-.9C16.4 5 12 5 12 5h0s-4.4 0-7.1.3c-.4 0-1.3 0-2.1.9C2.2 6.9 2 8.4 2 8.4S1.8 10.1 1.8 11.8v1.3C1.8 14.8 2 16.5 2 16.5s.2 1.5.8 2.2c.8.9 1.8.9 2.3 1 1.7.2 6.9.3 6.9.3s4.4 0 7.1-.3c.4 0 1.3 0 2.1-.9.6-.7.8-2.2.8-2.2s.2-1.7.2-3.4v-1.3c0-1.7-.2-3.4-.2-3.4ZM9.8 14.6V9l5.8 2.8-5.8 2.8Z"/></svg></a>
+        </div>
+      </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Дракон Трейд. Карго-логистика и таможенное оформление грузов из Китая.</span>
-      <span>ИНН 0000000000 · ОГРН 0000000000000</span>
+      <span class="footer-legal"><a href="#">Политика конфиденциальности</a><a href="#">Пользовательское соглашение</a></span>
     </div>
   </div>
 </footer>

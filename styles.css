@@ -1,260 +1,177 @@
-  /* ================= ORBITAL — dark global enterprise network ================= */
+  /* ================= LIGHT — Orionix-inspired editorial studio look ================= */
+  /* Registering --depth (rather than leaving it an untyped custom
+     property) is what lets it actually TRANSITION — script.js jumps it
+     between discrete values (18px near tier, 6px far tier) as a card
+     crosses between the two, and an unregistered custom property can
+     only ever snap between values, never interpolate, no matter what
+     transition is declared on the properties that consume it via
+     calc(). Declaring its syntax as <length> tells the browser it's a
+     real animatable numeric value, so the transition on .conveyor-card
+     (see .conveyor.is-live .conveyor-card) smooths that 18px<->6px
+     change into a gradual rib-width change instead of a jump —
+     requested as "плавное увеличение рёбер" for the near/far handoff. */
+  @property --depth{
+    syntax:'<length>';
+    inherits:true;
+    initial-value:18px;
+  }
   :root{
-    --bg-deep:#0a0a0c;
-    --bg-1:#0d0d12;
-    --violet:#6d5bff;
-    --violet-bright:#8f7dff;
-    --violet-dim:#443a99;
-    --amber:#ff9a52;
-    --amber-bright:#ffb377;
-    --ink:#f4f3f8;
-    --ink-dim:#a9a7bb;
-    --ink-faint:#706e85;
-    --line:rgba(255,255,255,.10);
-    --line-strong:rgba(255,255,255,.20);
+    --bg:#f8f6f2;
+    --bg-alt:#f1ede5;
+    --surface:#ffffff;
+    --ink:#18150f;
+    --ink-dim:#5b564c;
+    --ink-faint:#948d7e;
+    --line:rgba(24,21,15,.10);
+    --line-strong:rgba(24,21,15,.18);
+    --accent:#8a6518;
+    --accent-bright:#c99a42;
+    --accent-wash:rgba(138,101,24,.10);
+    --ink-invert:#f8f6f2;
+    --ink-invert-dim:#a8a297;
 
-    --font-display:'Marcellus', Georgia, 'Times New Roman', serif;
-    --font-body:'Manrope', 'Segoe UI', Arial, sans-serif;
+    --font-display:'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body:'Inter', 'Segoe UI', Arial, sans-serif;
     --font-mono:'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
 
-    --glass-fill: rgba(255,255,255,.06);
-    --glass-fill-hover: rgba(255,255,255,.09);
-    --glass-border: rgba(255,255,255,.14);
-    --glass-border-hover: rgba(143,125,255,.55);
-    --glass-shine: linear-gradient(135deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.03) 30%, transparent 55%);
-    --glass-shadow: 0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08);
-    --glow-violet: 0 0 0 1px rgba(143,125,255,.3), 0 18px 46px -12px rgba(109,91,255,.55);
-    --glow-amber: 0 0 0 1px rgba(255,154,82,.28), 0 18px 46px -12px rgba(255,154,82,.4);
+    --card-shadow: 0 1px 1px rgba(24,21,15,.05), 0 22px 40px -22px rgba(24,21,15,.20);
+    --card-shadow-hover: 0 1px 1px rgba(24,21,15,.06), 0 30px 54px -20px rgba(24,21,15,.26);
+    --card-shine: inset 0 1px 0 rgba(255,255,255,.9);
 
-    --r-card: 16px;
-    --r-panel: 20px;
-    --r-panel-lg: 26px;
+    --r-card: 20px;
+    --r-panel: 22px;
+    --r-panel-lg: 28px;
     --r-pill: 999px;
 
     --ease-spring: cubic-bezier(.16,1,.3,1);
     --ease-out: cubic-bezier(.32,.72,0,1);
 
-    --fs-hero: clamp(2.3rem, 4.4vw + 1rem, 4.1rem);
-    --fs-h2: clamp(1.65rem, 2.2vw + 0.9rem, 2.4rem);
-    --fs-h3: 1.15rem;
+    --fs-hero: clamp(2.4rem, 4.2vw + 1rem, 4.4rem);
+    --fs-h2: clamp(1.7rem, 2.1vw + 0.9rem, 2.6rem);
+    --fs-h3: 1.2rem;
     --fs-body: 1.02rem;
 
-    --container: 1220px;
+    --container: 1800px;
   }
 
   *,*::before,*::after{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; background:var(--bg-deep); }
+  html{ scroll-behavior:smooth; background:var(--bg); }
   @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
   body{
     margin:0;
+    background-color:var(--bg);
     color:var(--ink);
     font-family:var(--font-body);
     font-size:var(--fs-body);
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
-    /* No background here on purpose: a negative z-index child (.bg-fixed)
-       always paints behind ALL normal in-flow content in the painting
-       order — including an ordinary sibling's own background — so an
-       opaque body background would sit on top of it and hide it entirely.
-       html's background above is the real fallback/canvas paint. */
   }
   img{ max-width:100%; display:block; }
   a{ color:inherit; text-decoration:none; }
   ul{ list-style:none; margin:0; padding:0; }
   h1,h2,h3,p{ margin:0; }
-  h1,h2,h3{ font-family:var(--font-display); font-weight:400; text-wrap:balance; }
-  h1 em, h2 em{ color:var(--violet-bright); font-style:normal; background:linear-gradient(90deg, var(--violet-bright), var(--amber-bright)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  h1,h2,h3{ font-family:var(--font-display); font-weight:500; text-wrap:balance; font-optical-sizing:auto; }
+  h1 em, h2 em{ font-style:italic; font-weight:400; color:var(--accent); }
   button{ font-family:inherit; cursor:pointer; }
 
-  :focus-visible{ outline:2px solid var(--violet-bright); outline-offset:3px; border-radius:4px; }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:4px; }
 
-  ::selection{ background:var(--violet); color:#fff; }
+  ::selection{ background:var(--accent); color:#fff; }
 
   .container{
     width:100%;
     max-width:var(--container);
     margin-inline:auto;
-    padding-inline:clamp(1.25rem, 4vw, 3rem);
-  }
-
-  /* ---------------- FIXED BACKGROUND LAYER ----------------
-     Never background-attachment:fixed on body (broken on iOS Safari) — a
-     dedicated position:fixed div sits behind everything instead.
-     "Grid Floor": a dark-violet glass base (not flat black), two soft color
-     blobs for ambient sky glow, a 3D-perspective diagonal grid receding to a
-     horizon (large diamond cells; a blurred glow duplicate under a faint
-     sharp core — never one hard fully-opaque line, which aliases into a
-     broken/dashed look under the perspective transform), one slow diagonal
-     sheen drifting across it like a reflection on glass, plus the original
-     low-opacity grain overlay on top for texture. */
-  .bg-fixed{
-    position:fixed; inset:0;
-    z-index:-2;
-    overflow:hidden;
-    pointer-events:none;
-    perspective:600px;
-  }
-  .bg-base{
-    position:absolute; inset:0;
-    background:
-      radial-gradient(130% 75% at 18% -12%, rgba(255,255,255,.05) 0%, transparent 52%),
-      radial-gradient(70% 55% at 88% 12%, rgba(109,91,255,.09) 0%, transparent 62%),
-      radial-gradient(65% 55% at 6% 96%, rgba(0,0,0,.55) 0%, transparent 68%),
-      radial-gradient(55% 50% at 98% 100%, rgba(0,0,0,.45) 0%, transparent 65%),
-      linear-gradient(160deg, #150f22 0%, #120c1e 45%, #0e0a17 100%);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
-  }
-  .bg-sky{
-    position:absolute; inset:0;
-    background:
-      radial-gradient(40% 34% at 20% 18%, rgba(109,91,255,.24) 0%, transparent 70%),
-      radial-gradient(34% 30% at 84% 14%, rgba(255,154,82,.12) 0%, transparent 72%);
-    filter:blur(20px);
-    animation:bgSkyDrift 34s ease-in-out infinite alternate;
-  }
-  @keyframes bgSkyDrift{
-    0%{ transform:translateY(0) scale(1); }
-    100%{ transform:translateY(-2%) scale(1.06); }
-  }
-  .bg-horizon{
-    position:absolute; left:0; right:0; top:38%; height:1px;
-    background:linear-gradient(90deg, transparent, rgba(143,125,255,.35) 30%, rgba(255,179,119,.3) 70%, transparent);
-    box-shadow:0 0 50px 10px rgba(109,91,255,.22);
-    filter:blur(1px);
-  }
-  .bg-plane-wrap{
-    position:absolute; left:-30%; right:-30%; top:38%; bottom:0;
-    overflow:hidden;
-    -webkit-mask-image:linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
-    mask-image:linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
-  }
-  .bg-plane-glow{
-    position:absolute; inset:-20% -100% -100%;
-    background-image:
-      repeating-linear-gradient(48deg, rgba(160,145,255,.5) 0 3px, transparent 3px 132px),
-      repeating-linear-gradient(-48deg, rgba(160,145,255,.5) 0 3px, transparent 3px 132px);
-    filter:blur(9px);
-    opacity:.55;
-    transform:rotateX(60deg);
-    transform-origin:top center;
-    animation:bgPlaneMove 16s linear infinite;
-  }
-  .bg-plane{
-    position:absolute; inset:-20% -100% -100%;
-    background-image:
-      repeating-linear-gradient(48deg, rgba(196,188,255,.16) 0 1px, transparent 1px 132px),
-      repeating-linear-gradient(-48deg, rgba(196,188,255,.10) 0 1px, transparent 1px 132px);
-    transform:rotateX(60deg);
-    transform-origin:top center;
-    animation:bgPlaneMove 16s linear infinite;
-  }
-  @keyframes bgPlaneMove{
-    from{ background-position:0 0, 0 0; }
-    to{ background-position:132px 132px, -132px 132px; }
-  }
-  .bg-sheen{
-    position:absolute; inset:-20% -100% -100%;
-    background-image:linear-gradient(48deg, transparent 44%, rgba(255,221,190,.5) 49.5%, rgba(190,178,255,.4) 51.5%, transparent 57%);
-    background-size:320% 320%;
-    background-repeat:no-repeat;
-    filter:blur(26px);
-    transform:rotateX(60deg);
-    transform-origin:top center;
-    mix-blend-mode:screen;
-    animation:bgSheenSweep 13s ease-in-out infinite;
-  }
-  @keyframes bgSheenSweep{
-    0%,100%{ background-position:140% -140%; opacity:0; }
-    35%{ opacity:.85; }
-    55%{ background-position:-60% 90%; opacity:.85; }
-    80%{ opacity:0; }
-  }
-  .bg-beam{
-    position:absolute; top:0; width:220px; height:55%;
-    background:linear-gradient(to bottom, rgba(255,179,119,.10), transparent);
-    filter:blur(34px);
-  }
-  .bg-beam--1{ left:14%; }
-  .bg-beam--2{ left:70%; background:linear-gradient(to bottom, rgba(143,125,255,.12), transparent); }
-  .bg-fixed::after{
-    content:"";
-    position:absolute; inset:0;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-    opacity:.05;
-    mix-blend-mode:overlay;
-  }
-  /* The perspective grid reads cramped on narrow screens and costs more to
-     render — keep the base glass tint and ambient glow, drop the floor. */
-  @media (max-width:700px){
-    .bg-plane-wrap, .bg-horizon, .bg-beam{ display:none; }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .bg-sky, .bg-plane, .bg-plane-glow, .bg-sheen{ animation:none; }
-    .bg-sheen{ opacity:.3; background-position:20% 20%; }
+    padding-inline:clamp(1rem, 2.5vw, 2.25rem);
   }
 
   /* ================= HEADER ================= */
   .site-header{
     position:sticky; top:0; z-index:500;
-    background:rgba(10,10,12,.5);
-    backdrop-filter:blur(18px) saturate(140%);
-    -webkit-backdrop-filter:blur(18px) saturate(140%);
-    border-bottom:1px solid var(--line);
-    transition:background .3s var(--ease-out), border-color .3s var(--ease-out);
+    background:var(--bg);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s var(--ease-out), box-shadow .3s var(--ease-out);
   }
-  .site-header.is-scrolled{ background:rgba(10,10,12,.78); border-bottom-color:var(--line-strong); }
+  .site-header.is-scrolled{ border-bottom-color:var(--line); box-shadow:0 1px 0 rgba(24,21,15,.03), 0 16px 30px -20px rgba(24,21,15,.25); }
   .header-inner{ display:flex; align-items:center; justify-content:space-between; gap:1.5rem; padding-block:.9rem; }
   .brand{ display:flex; align-items:center; gap:.7rem; flex-shrink:0; }
-  .brand-logo{ width:36px; height:36px; flex-shrink:0; object-fit:contain; filter:drop-shadow(0 0 12px rgba(143,125,255,.35)); }
-  .brand-word{ font-family:var(--font-display); font-size:1.15rem; letter-spacing:.02em; color:var(--ink); }
+  .brand-logo{ width:34px; height:34px; flex-shrink:0; object-fit:contain; }
+  .brand-word{ font-family:var(--font-display); font-size:1.15rem; letter-spacing:.01em; color:var(--ink); }
 
   .main-nav{ display:flex; align-items:center; gap:clamp(.7rem,1.3vw,1.5rem); }
   .main-nav a{ font-size:.87rem; color:var(--ink-dim); position:relative; padding-block:.3rem; transition:color .2s var(--ease-out); white-space:nowrap; }
-  .main-nav a::after{ content:""; position:absolute; left:0; right:0; bottom:-2px; height:1px; background:linear-gradient(90deg,var(--violet-bright),var(--amber-bright)); transform:scaleX(0); transform-origin:left; transition:transform .25s var(--ease-out); }
+  .main-nav a::after{ content:""; position:absolute; left:0; right:0; bottom:-2px; height:1px; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .25s var(--ease-out); }
   .main-nav a:hover{ color:var(--ink); }
   .main-nav a:hover::after, .main-nav a.is-active::after{ transform:scaleX(1); }
   .main-nav a.is-active{ color:var(--ink); }
 
   .header-actions{ display:flex; align-items:center; gap:1.1rem; flex-shrink:0; }
   .phone-link{ display:flex; align-items:center; gap:.6rem; color:var(--ink); }
-  .phone-link svg{ width:16px; height:16px; color:var(--violet-bright); flex-shrink:0; }
+  .phone-link svg{ width:16px; height:16px; color:var(--accent); flex-shrink:0; }
   .phone-link span{ display:flex; flex-direction:column; gap:.15rem; }
   .phone-link strong{ font-family:var(--font-mono); font-weight:500; font-size:.92rem; }
   .phone-link small{ font-size:.72rem; color:var(--ink-faint); }
 
+  /* Pill buttons — solid near-black by default (the reference's one real
+     accent move is a black pill on a cream page), a light bordered variant
+     for secondary spots, both flipping to white-on-transparent inside dark
+     bands (footer). */
   .btn{
     position:relative;
     display:inline-flex; align-items:center; justify-content:center; gap:.7rem;
     padding:.65rem .6rem .65rem 1.5rem;
     border:1px solid var(--line-strong);
     border-radius:var(--r-pill);
-    background:var(--glass-fill);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
+    background:var(--surface);
     color:var(--ink);
     font-size:.88rem; letter-spacing:.02em;
-    transition:background .3s var(--ease-out), border-color .3s var(--ease-out), box-shadow .3s var(--ease-out), transform .2s var(--ease-out);
+    overflow:hidden;
+    transition:background .3s var(--ease-out), border-color .3s var(--ease-out), box-shadow .3s var(--ease-out), transform .2s var(--ease-out), color .3s var(--ease-out);
     white-space:nowrap;
   }
   .btn:not(:has(span)){ padding:.72rem 1.5rem; }
-  .btn span{ display:inline-flex; align-items:center; justify-content:center; width:1.9rem; height:1.9rem; flex-shrink:0; border-radius:50%; background:rgba(255,255,255,.1); transition:transform .35s var(--ease-spring); }
-  .btn:hover{ border-color:var(--glass-border-hover); box-shadow:var(--glow-violet); }
-  .btn:hover span{ transform:translate(2px,-1px) scale(1.06); }
+  .btn span{ display:inline-flex; align-items:center; justify-content:center; width:1.9rem; height:1.9rem; flex-shrink:0; border-radius:50%; background:var(--bg-alt); }
+  .btn:hover{ border-color:var(--ink); box-shadow:0 10px 22px -12px rgba(24,21,15,.35); }
   .btn:active{ transform:scale(.98); }
-  .btn-solid{
-    color:#0c0a14;
-    border-color:transparent;
-    background:linear-gradient(120deg, var(--amber-bright) 0%, var(--violet-bright) 100%);
-    box-shadow:0 14px 34px -10px rgba(109,91,255,.55);
+  /* Static button, glass shine sweeping across on hover instead of the
+     icon jiggling ("оставить их в статичном положении... дорогой
+     стеклянный блик пробегающий по кнопке"). A skewed bright band slides
+     left-to-right through ::before, clipped to the pill by the button's
+     own overflow:hidden; pointer-events:none keeps it from blocking
+     clicks. */
+  .btn::before{
+    content:"";
+    position:absolute; inset:0;
+    z-index:1;
+    pointer-events:none;
+    background:linear-gradient(115deg,
+      transparent 35%,
+      rgba(255,255,255,.04) 42%,
+      rgba(255,255,255,.1) 47%,
+      rgba(255,255,255,.16) 50%,
+      rgba(255,255,255,.1) 53%,
+      rgba(255,255,255,.04) 58%,
+      transparent 65%);
+    transform:translateX(-130%);
   }
-  .btn-solid span{ background:rgba(12,10,20,.16); }
-  .btn-solid:hover{ box-shadow:0 18px 42px -8px rgba(109,91,255,.7), var(--glow-amber); }
+  .btn:hover::before{ transform:translateX(130%); transition:transform 4s var(--ease-out); }
+  .btn-solid{
+    color:var(--ink-invert);
+    border-color:transparent;
+    background:var(--ink);
+    box-shadow:0 14px 30px -12px rgba(24,21,15,.45);
+  }
+  .btn-solid span{ background:rgba(255,255,255,.14); }
+  .btn-solid:hover{ background:var(--accent); box-shadow:0 18px 36px -10px rgba(138,101,24,.45); }
   .btn-block{ width:100%; }
+  .btn-sm{ padding:.55rem .5rem .55rem 1.1rem; font-size:.82rem; }
+  .btn-sm:not(:has(span)){ padding:.6rem 1.1rem; }
+  .btn-sm span{ width:1.6rem; height:1.6rem; }
 
-  .nav-toggle{ display:none; width:38px; height:38px; align-items:center; justify-content:center; background:none; border:1px solid var(--line); color:var(--ink); border-radius:10px; }
+  .nav-toggle{ display:none; width:38px; height:38px; align-items:center; justify-content:center; background:none; border:1px solid var(--line-strong); color:var(--ink); border-radius:10px; }
   .nav-toggle svg{ width:18px; height:18px; }
 
-  .mobile-panel{ display:none; max-height:0; overflow:hidden; background:rgba(9,9,11,.97); border-bottom:1px solid var(--line); transition:max-height .35s var(--ease-out); }
+  .mobile-panel{ display:none; max-height:0; overflow:hidden; background:rgba(248,246,242,.98); border-bottom:1px solid var(--line); transition:max-height .35s var(--ease-out); }
   .mobile-panel .container{ padding-block:1rem; display:flex; flex-direction:column; gap:1.1rem; }
   .mobile-panel a{ font-size:1.02rem; color:var(--ink-dim); }
   .site-header.nav-open .mobile-panel{ max-height:460px; }
@@ -274,76 +191,220 @@
   .reveal.is-visible{ opacity:1; transform:none; filter:blur(0); }
   @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; filter:none; transition:none; } }
 
-  .eyebrow{ display:inline-flex; align-items:center; gap:.55em; font-family:var(--font-mono); font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--violet-bright); padding:.4em 1em .4em .8em; border-radius:var(--r-pill); background:rgba(109,91,255,.12); border:1px solid rgba(109,91,255,.32); }
-  .eyebrow::before{ content:""; width:.5em; height:.5em; border-radius:50%; background:var(--amber-bright); box-shadow:0 0 8px rgba(255,179,119,.8); }
+  .eyebrow{ display:inline-flex; align-items:center; gap:.55em; font-family:var(--font-mono); font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); padding:.4em 1em .4em .8em; border-radius:var(--r-pill); background:var(--accent-wash); border:1px solid rgba(138,101,24,.24); }
+  .eyebrow::before{ content:""; width:.5em; height:.5em; border-radius:50%; background:var(--accent); }
 
-  .gold-line{ display:block; width:64px; height:3px; margin-top:.9rem; border-radius:var(--r-pill); background:linear-gradient(90deg, var(--violet-bright), var(--amber-bright)); box-shadow:0 0 14px rgba(143,125,255,.4); }
+  .gold-line{ display:block; width:64px; height:2px; margin-top:.9rem; border-radius:var(--r-pill); background:var(--accent); }
 
-  /* ---- shared glass surface ---- */
-  .glass{
+  /* ---- shared card surface: flat white, no blur, elevated by a tuned
+     shadow — reserved for genuine standalone tiles (services, methods,
+     contacts, reviews, the form, the CTA panel). Section intros, stat
+     rows and text blocks stay unboxed, flat on the page background, the
+     way the reference actually treats them. ---- */
+  .contact-card, form.request-form, .page-cta{
     position:relative;
-    background:var(--glass-fill);
-    backdrop-filter:blur(18px) saturate(140%);
-    -webkit-backdrop-filter:blur(18px) saturate(140%);
-    border:1px solid var(--glass-border);
-    box-shadow:var(--glass-shadow);
-    overflow:hidden;
-  }
-  .glass::before{ content:""; position:absolute; inset:0; background:var(--glass-shine); pointer-events:none; }
-
-  .section-head, .block-intro, .service-card, .method-card, .benefit-item, .stats-panel .stat,
-  .step-text, .control-list, .route-track, .contact-card, .review-card, form.request-form,
-  .page-hero-panel, .page-cta, .about-copy, .hero-services{
-    position:relative;
-    background:var(--glass-fill);
-    backdrop-filter:blur(16px) saturate(140%);
-    -webkit-backdrop-filter:blur(16px) saturate(140%);
-    border:1px solid var(--glass-border);
-    box-shadow:var(--glass-shadow);
+    background:var(--surface);
+    border:1px solid var(--line);
+    box-shadow:var(--card-shadow), var(--card-shine);
     border-radius:var(--r-card);
-    overflow:hidden;
-    transition:border-color .3s var(--ease-out), box-shadow .3s var(--ease-out), transform .3s var(--ease-out), background .3s var(--ease-out);
+    transition:border-color .3s var(--ease-out), box-shadow .3s var(--ease-out), transform .3s var(--ease-out);
   }
-  .section-head::before, .block-intro::before, .service-card::before, .method-card::before,
-  .benefit-item::before, .stats-panel .stat::before, .step-text::before, .control-list::before,
-  .route-track::before, .contact-card::before, .review-card::before, form.request-form::before,
-  .page-hero-panel::before, .page-cta::before, .about-copy::before, .hero-services::before{
-    content:""; position:absolute; inset:0; background:var(--glass-shine); pointer-events:none;
+  /* Reviews cards get their own warm cream fill instead of the shared
+     pure-white --surface, on request ("на референсе карточки бежевого
+     оттенка, а не серые и белые"). */
+  .reviews-card{
+    position:relative;
+    background:#faf5ea;
+    border:1px solid var(--line);
+    box-shadow:var(--card-shadow), var(--card-shine);
+    border-radius:var(--r-card);
   }
-  .service-card:hover, .method-card:hover, .benefit-item:hover, .contact-card:hover, .review-card:hover{
+  .contact-card:hover{
     transform:translateY(-5px);
-    border-color:var(--glass-border-hover);
-    background:var(--glass-fill-hover);
-    box-shadow:var(--glow-violet), var(--glass-shadow);
+    border-color:var(--line-strong);
+    box-shadow:var(--card-shadow-hover), var(--card-shine);
   }
-  .section-head:hover, .block-intro:hover, .control-list:hover, .route-track:hover, form.request-form:hover, .hero-services:hover{
-    border-color:var(--glass-border-hover);
+  form.request-form:hover{
+    border-color:var(--line-strong);
   }
-  .section-head, .page-hero-panel{ border-radius:var(--r-panel); }
-  .block-intro{ border-radius:var(--r-panel); padding:1.1rem 1.5rem; }
   .block-intro h2{ font-size:var(--fs-h2); color:var(--ink); margin-top:.6rem; }
 
   /* ================= HERO ================= */
   .hero{ padding-block:clamp(2rem, 4.5vw, 3.75rem) clamp(1.75rem, 4vw, 3.25rem); overflow:hidden; }
-  .hero-copy{ max-width:40rem; position:relative; z-index:2; }
+  .hero-top{ display:flex; align-items:center; justify-content:space-between; gap:clamp(2.5rem, 6vw, 4.5rem); }
+  .hero-copy{ max-width:40rem; position:relative; z-index:2; flex:1 1 auto; }
+  /* Russia outline (no fill inside or outside — pure gold border) placed
+     to the right of the hero text. Hidden below the width where it would
+     otherwise force the copy column to shrink below a readable measure. */
+  .hero-map{ flex:0 1 auto; margin-right:clamp(0rem, .4vw, .35rem); }
+  .hero-map__stage{
+    position:relative;
+    width:min(69vw, 1320px);
+    aspect-ratio:6464/3892;
+  }
+  /* Left-shift control, on request ("левее на N"), scoped to the hero's own
+     paired-with-text layout specifically (not the base .hero-map__stage
+     rule) — this same stage markup is reused standalone/centered on
+     about.html's video block (see .about-video), which must NOT inherit a
+     shift tuned only for sitting next to .hero-copy. margin-right on this
+     flex item stopped having any visible effect once the map's own width +
+     margin already overflowed .hero-top's available space — .hero has
+     overflow:hidden, so that margin was just growing an already
+     fully-clipped, invisible trailing gap past the right edge; the map's
+     LEFT edge (the only visible boundary) is set by hero-copy's width +
+     gap and never moved no matter how large that margin got. transform
+     sidesteps the flex/overflow math entirely and shifts the rendered box
+     directly, so it reliably tracks further "левее" asks. */
+  .hero-top .hero-map__stage{ transform:translateX(-120px); }
+  /* Dimmed on request ("рамку карты менее яркую") — the source PNG's gold
+     is quite saturated/bright by default. */
+  .hero-map__img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; pointer-events:none; }
+  /* Simulated video, on request ("съемитируй фон любой фотографией с
+     значком воспроизведения... видео должно ограничиваться контуром
+     карты") — a placeholder photo standing in for the eventual <video>,
+     masked to Russia's actual silhouette. The source PNG is outline-only
+     (transparent interior), so a hand-drawn clip-path was only ever a
+     rough guess and didn't line up with the real border — instead the
+     mask below is a filled silhouette derived programmatically from
+     that exact outline (flood-fill from the canvas edge through the
+     transparent area finds everything NOT reached — the outline ring
+     plus the enclosed interior — and fills it solid), so it matches the
+     drawn border pixel-for-pixel instead of an approximation. Inlined as
+     a data: URI (not url(images/hero-russia-mask.png)) because Chrome
+     refuses to fetch a mask-image over file:// — CORS blocks it with
+     "origin 'null'" even though a plain <img src> to the same path
+     loads fine — which left the interior fully empty when opening
+     index.html directly instead of through a server; inlining sidesteps
+     that fetch entirely. The gold outline image sits on top, unclipped,
+     acting as the frame border. */
+  .hero-map__video-fake{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    -webkit-mask-image:url(data:image/png;base64,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);
+    mask-image:url(data:image/png;base64,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);
+    -webkit-mask-size:100% 100%;
+    mask-size:100% 100%;
+    -webkit-mask-repeat:no-repeat;
+    mask-repeat:no-repeat;
+    -webkit-mask-position:center;
+    mask-position:center;
+  }
+  .hero-map__play{
+    /* Base rule centers on the plain box midpoint (50/50) -- correct for
+       a plain rectangle like about.html's .about-video__panel. The hero's
+       own placement (silhouette's visual center, not the canvas
+       midpoint -- the Russia shape isn't symmetric in its bounding box)
+       is a scoped override right below, since that offset only makes
+       sense next to the map artwork, not a plain rectangular panel. */
+    position:absolute; top:50%; left:50%; z-index:2;
+    transform:translate(-50%,-50%);
+    width:72px; height:72px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.5);
+    background:rgba(20,16,10,.5);
+    backdrop-filter:blur(4px);
+    color:#fff;
+    cursor:pointer;
+  }
+  .hero-map__play svg{ width:26px; height:26px; margin-left:3px; }
+  /* Silhouette's own visual center (47.5%, 50.5% of the canvas, +100px
+     down), on request ("семитрично по центру рисунка карты", "кнопку на
+     100 выше/ниже") -- bbox: x 2.7%-92.3%, y 10.2%-90.8%. Scoped to the
+     hero so about.html's plain-rectangle reuse keeps the simple 50/50
+     centering above instead. */
+  .hero-map .hero-map__play{ top:calc(50.5% + 100px); left:51%; }
+
+  /* Video modal, opened by the hero-map play button, on request ("всплывало
+     окно с самим видео, в 2/3 экрана примерно"). Sized off both vw and vh
+     (not just vw) so a short/wide viewport can't force it taller than the
+     screen — object-fit:cover on the media crops to fill whichever
+     dimension wins rather than leaving letterboxing. Lives outside .hero
+     (sibling of header, before main) so its fixed positioning always
+     covers the whole viewport regardless of any ancestor's own stacking
+     context or overflow:hidden (.hero itself clips overflow).
+
+     Opens with a fade + gentle scale-up instead of popping in instantly
+     ("плавно всплывало красиво, а не резко"). Can't use the [hidden]
+     attribute for show/hide here — display:none has no intermediate
+     frames, so toggling it can't transition at all. Instead the modal
+     always stays in the DOM at opacity:0/pointer-events:none at rest, and
+     .is-open (toggled by script.js, with aria-hidden kept in sync for
+     screen readers) drives the fade + scale in both directions. */
+  .video-modal{
+    position:fixed; inset:0; z-index:900;
+    display:flex; align-items:center; justify-content:center; padding:2rem;
+    opacity:0; pointer-events:none;
+    transition:opacity 2s var(--ease-out);
+  }
+  .video-modal.is-open{ opacity:1; pointer-events:auto; }
+  .video-modal__backdrop{ position:absolute; inset:0; background:rgba(12,10,7,.78); backdrop-filter:blur(3px); }
+  .video-modal__panel{
+    position:relative; z-index:1;
+    width:min(66vw, 118vh, 1400px);
+    aspect-ratio:16/9;
+    max-height:66vh;
+    background:#000;
+    border-radius:var(--r-panel-lg);
+    overflow:hidden;
+    box-shadow:0 50px 100px -20px rgba(0,0,0,.6);
+    transform:scale(.9) translateY(16px);
+    transition:transform 2.2s var(--ease-spring);
+  }
+  .video-modal.is-open .video-modal__panel{ transform:scale(1) translateY(0); }
+  .video-modal__media{ width:100%; height:100%; object-fit:cover; }
+  .video-modal__close{
+    position:absolute; top:14px; right:14px; z-index:2;
+    width:40px; height:40px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.3);
+    background:rgba(0,0,0,.4);
+    color:#fff;
+    cursor:pointer;
+  }
+  .video-modal__close svg{ width:18px; height:18px; }
+  @media (max-width: 640px){ .video-modal{ padding:1rem; } .video-modal__panel{ width:100%; } }
+  @media (max-width: 1100px){ .hero-map{ display:none; } }
+
+  /* Video block on about.html, before the "Остались вопросы?" CTA. First
+     built reusing the hero's Russia-outline map screen, then changed on
+     request ("в о нас не нужно карту а в ней фото... нужно уже открытое
+     прямоугольное окно") to a plain rectangular panel instead — same idea
+     as the hero's video-preview (a placeholder photo standing in for the
+     eventual video), but shown directly with no map mask and no
+     click-to-open modal step, styled like .video-modal__panel's own
+     rounded dark frame since that's the "already open" state this is
+     meant to look like. */
+  .about-video{ display:flex; justify-content:center; }
+  .about-video__panel{
+    position:relative;
+    width:min(66vw, 1100px);
+    aspect-ratio:16/9;
+    background:#000;
+    border-radius:var(--r-panel-lg);
+    overflow:hidden;
+    box-shadow:var(--card-shadow);
+  }
+  .about-video__media{ width:100%; height:100%; object-fit:cover; }
   .hero-copy .eyebrow{ margin-bottom:1rem; }
-  .hero h1{ font-family:var(--font-body); font-weight:800; font-size:var(--fs-hero); line-height:1.08; color:var(--ink); letter-spacing:-.01em; }
-  .hero h1 em{ font-family:var(--font-display); font-style:italic; font-weight:400; }
-  .hero-sub{ margin-top:1rem; max-width:46ch; color:var(--ink-dim); font-size:.98rem; font-weight:600; line-height:1.65; }
+  .hero h1{ font-weight:500; font-size:var(--fs-hero); line-height:1.06; color:var(--ink); letter-spacing:-.01em; }
+  .hero-sub{ margin-top:1rem; max-width:46ch; color:var(--ink-dim); font-size:1rem; font-weight:500; line-height:1.65; }
   .hero-cta-row{ margin-top:1.6rem; display:flex; flex-wrap:wrap; align-items:center; gap:1.4rem; }
-  .hero-cta-row .link-arrow{ display:inline-flex; align-items:center; gap:.5rem; color:var(--ink-dim); font-size:.92rem; border-bottom:1px solid var(--line-strong); padding-bottom:.2rem; transition:color .2s var(--ease-out), border-color .2s var(--ease-out); }
-  .hero-cta-row .link-arrow:hover{ color:var(--ink); border-color:var(--violet-bright); }
+  .link-arrow{ display:inline-flex; align-items:center; gap:.5rem; color:var(--ink-dim); font-size:.92rem; border-bottom:1px solid var(--line-strong); padding-bottom:.2rem; white-space:nowrap; transition:color .2s var(--ease-out), border-color .2s var(--ease-out); }
+  .link-arrow:hover{ color:var(--ink); border-color:var(--accent); }
 
   .stat-row{ margin-top:clamp(1.6rem, 3.2vw, 2.4rem); display:grid; grid-template-columns:repeat(3, auto); gap:clamp(1.5rem, 4vw, 3rem); border-top:1px solid var(--line); padding-top:1.4rem; max-width:44rem; position:relative; z-index:2; }
-  .stat-num{ font-family:var(--font-mono); font-size:clamp(1.5rem, 2.2vw, 1.9rem); color:var(--violet-bright); font-variant-numeric:tabular-nums; }
+  .stat-num{ font-family:var(--font-mono); font-size:clamp(1.5rem, 2.2vw, 1.9rem); color:var(--ink); font-variant-numeric:tabular-nums; }
   .stat-label{ margin-top:.35rem; font-size:.8rem; color:var(--ink-faint); }
   @media (max-width: 940px){ .stat-row{ grid-template-columns:repeat(3, 1fr); } }
   @media (max-width: 520px){ .stat-row{ grid-template-columns:1fr 1fr; } }
 
-  .hero-services{ margin-top:clamp(1.6rem, 3.2vw, 2.4rem); display:grid; grid-template-columns:repeat(4, 1fr); border-radius:25px; position:relative; z-index:2; }
+  .hero-services{ margin-top:clamp(1.6rem, 3.2vw, 2.4rem); display:grid; grid-template-columns:repeat(4, 1fr); border-top:1px solid var(--line); position:relative; z-index:2; }
   .hero-service{ padding:1.2rem 1.1rem; display:flex; align-items:flex-start; gap:.9rem; border-left:1px solid var(--line); position:relative; z-index:1; }
   .hero-service:first-child{ border-left:none; }
-  .hero-service .service-number{ font-family:var(--font-mono); font-size:.78rem; color:var(--violet-bright); border:1px solid var(--line-strong); border-radius:50%; width:26px; height:26px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .hero-service .service-number{ font-family:var(--font-mono); font-size:.78rem; color:var(--accent); border:1px solid var(--line-strong); border-radius:50%; width:26px; height:26px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
   .hero-service strong{ display:block; font-size:.95rem; color:var(--ink); }
   .hero-service span{ display:block; margin-top:.3rem; font-size:.8rem; color:var(--ink-dim); line-height:1.5; }
   @media (max-width: 720px){
@@ -357,20 +418,9 @@
     .hero-service:last-child{ border-bottom:none; }
   }
 
-  /* Orbital route lines: faint arcs with a travelling pulse, purely
-     decorative, sit behind the hero copy at low opacity. */
-  .orbit-lines{ position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.55; }
-  .orbit-lines svg{ width:100%; height:100%; }
-  .orbit-lines path{ fill:none; stroke:url(#orbitGrad); stroke-width:1; opacity:.5; }
-  .orbit-lines circle.orbit-dot{ fill:var(--amber-bright); filter:drop-shadow(0 0 5px rgba(255,179,119,.9)); }
-  .orbit-lines .dash{ stroke-dasharray:6 10; animation:orbitDash 60s linear infinite; }
-  @keyframes orbitDash{ to{ stroke-dashoffset:-800; } }
-  @media (prefers-reduced-motion: reduce){ .orbit-lines .dash{ animation:none; } .orbit-lines animateMotion{ display:none; } }
-  @media (max-width: 720px){ .orbit-lines{ opacity:.3; } }
-
   /* ================= SECTION HEADS ================= */
   .section-pad{ padding-block:clamp(1.75rem, 4vw, 3.25rem); }
-  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; margin-bottom:clamp(1rem, 2vw, 1.6rem); padding:1.1rem 1.5rem; }
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; margin-bottom:clamp(1.75rem, 3.5vw, 2.75rem); }
   .section-head h2{ font-size:var(--fs-h2); color:var(--ink); margin-top:.6rem; }
   .section-head p{ max-width:34ch; color:var(--ink-dim); font-size:.95rem; text-align:right; }
   @media (max-width: 720px){ .section-head{ flex-direction:column; align-items:flex-start; } .section-head p{ text-align:left; } }
@@ -378,8 +428,8 @@
 
   /* ---- page hero (About / Reviews) ---- */
   .page-hero{ padding-block:clamp(2.5rem, 5vw, 4rem) clamp(1.75rem, 4vw, 3rem); }
-  .page-hero-panel{ padding:clamp(1.8rem, 3vw, 2.6rem); max-width:56rem; border-radius:var(--r-panel); }
-  .page-hero-panel h1{ font-size:var(--fs-hero); color:var(--ink); line-height:1.1; }
+  .page-hero-panel{ max-width:56rem; }
+  .page-hero-panel h1, .reviews-hero__copy h1{ font-size:var(--fs-hero); color:var(--ink); line-height:1.1; }
   .page-hero-panel p{ margin-top:1.2rem; color:var(--ink-dim); font-size:1.02rem; max-width:60ch; line-height:1.7; }
 
   .page-cta{ text-align:center; padding:clamp(1.8rem,3vw,2.6rem); border-radius:var(--r-panel-lg); }
@@ -390,126 +440,1352 @@
   /* ================= BENEFITS / STATS ================= */
   .benefits-panel{ margin-top:clamp(1.3rem, 2.6vw, 2rem); display:grid; grid-template-columns:repeat(5, 1fr); gap:1rem; }
   .benefits-panel.count-3{ grid-template-columns:repeat(3, 1fr); }
-  .benefit-item{ padding:1.1rem; display:flex; flex-direction:column; gap:.5rem; }
-  .benefit-item__icon{ width:32px; height:32px; display:flex; align-items:center; justify-content:center; border:1px solid var(--line-strong); border-radius:50%; color:var(--amber-bright); flex-shrink:0; position:relative; z-index:1; }
+  .benefit-item{ display:flex; flex-direction:column; gap:.5rem; }
+  .benefit-item__icon{ width:32px; height:32px; display:flex; align-items:center; justify-content:center; border:1px solid var(--line-strong); border-radius:50%; color:var(--accent); flex-shrink:0; }
   .benefit-item__icon svg{ width:16px; height:16px; }
-  .benefit-item h3{ font-size:.9rem; font-weight:700; color:var(--ink); position:relative; z-index:1; }
-  .benefit-item p{ font-size:.8rem; color:var(--ink-dim); line-height:1.5; position:relative; z-index:1; }
+  .benefit-item h3{ font-size:.9rem; font-weight:700; color:var(--ink); }
+  .benefit-item p{ font-size:.8rem; color:var(--ink-dim); line-height:1.5; }
   @media (max-width: 940px){ .benefits-panel{ grid-template-columns:repeat(2, 1fr); } }
   @media (max-width: 560px){ .benefits-panel, .benefits-panel.count-3{ grid-template-columns:1fr; } }
 
-  .stats-panel{ margin-top:.9rem; display:grid; grid-template-columns:repeat(5, 1fr); gap:1rem; }
-  .stats-panel .stat{ padding:1.1rem; text-align:center; border-radius:var(--r-card); }
-  .stats-panel .stat-num{ font-size:1.4rem; position:relative; z-index:1; }
-  .stats-panel .stat-label{ margin-top:.4rem; font-size:.76rem; position:relative; z-index:1; }
-  @media (max-width: 940px){ .stats-panel{ grid-template-columns:repeat(2, 1fr); } }
-  @media (max-width: 560px){ .stats-panel{ grid-template-columns:1fr; } }
+  .stats-panel{ margin-top:1.4rem; display:grid; grid-template-columns:repeat(5, 1fr); border-top:1px solid var(--line); padding-top:1.4rem; }
+  .stats-panel .stat{ text-align:center; padding-inline:1rem; border-left:1px solid var(--line); }
+  .stats-panel .stat:first-child{ border-left:none; padding-left:0; }
+  .stats-panel .stat-num{ font-size:1.4rem; }
+  .stats-panel .stat-label{ margin-top:.4rem; font-size:.76rem; }
+  @media (max-width: 940px){ .stats-panel{ grid-template-columns:repeat(2, 1fr); } .stats-panel .stat:nth-child(2n+1){ border-left:none; padding-left:0; } }
+  @media (max-width: 560px){ .stats-panel{ grid-template-columns:1fr; } .stats-panel .stat{ border-left:none; padding-left:0; border-top:1px solid var(--line); padding-top:1rem; } .stats-panel .stat:first-child{ border-top:none; padding-top:0; } }
 
-  /* ================= SERVICES ================= */
-  .service-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; }
-  .service-card{ padding:clamp(1.2rem,1.8vw,1.6rem); display:flex; flex-direction:column; gap:.7rem; }
-  .service-card__top{ display:flex; align-items:center; justify-content:space-between; position:relative; z-index:1; }
-  .service-icon{ width:40px; height:40px; display:flex; align-items:center; justify-content:center; border:1px solid var(--line-strong); border-radius:50%; color:var(--violet-bright); }
-  .service-icon svg{ width:19px; height:19px; }
-  .service-card__num{ font-family:var(--font-mono); font-size:.8rem; color:var(--ink-faint); }
-  .service-card h3{ font-size:var(--fs-h3); color:var(--ink); position:relative; z-index:1; }
-  .service-card p{ color:var(--ink-dim); font-size:.92rem; line-height:1.6; position:relative; z-index:1; }
-  .service-card .card-link{ margin-top:auto; padding-top:.4rem; display:inline-flex; align-items:center; gap:.4rem; font-size:.85rem; color:var(--amber-bright); position:relative; z-index:1; transition:color .22s var(--ease-out); }
-  .service-card .card-link span{ display:inline-block; transition:transform .22s var(--ease-out); }
-  .service-card .card-link:hover{ color:var(--violet-bright); }
-  .service-card .card-link:hover span{ transform:translateX(5px); }
-  @media (max-width: 940px){ .service-grid{ grid-template-columns:repeat(2, 1fr); } }
-  @media (max-width: 560px){ .service-grid{ grid-template-columns:1fr; } }
+  /* ================= SERVICES (Featured-Work style, per reference) =================
+     Measured directly off orionix.framer.website at 1440px viewport via
+     getBoundingClientRect() on the 6 project-card frames — x, y, width,
+     height of every card:
+       Card0: x=948 y=2554 w=416 h=679   Card1: x=76  y=2981 w=525 h=856
+       Card2: x=730 y=3737 w=416 h=679   Card3: x=185 y=4574 w=525 h=856
+       Card4: x=948 y=5270 w=416 h=679   Card5: x=76  y=5848 w=416 h=679
+     This is NOT two fixed columns — x drifts too (right-side cards land
+     anywhere from 50.7% to 65.8% of viewport width, left-side from 0% to
+     8.5% of the content area). So this section is laid out with each
+     card individually placed (position:absolute + its own left/top),
+     not CSS Grid/columns — do not "clean this up" into a grid, the
+     irregular per-card placement is the deliberate result of measuring
+     the reference, not an oversight.
 
-  /* ================= DELIVERY ================= */
-  .method-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:1.1rem; }
-  .method-card{ padding:1.2rem; display:flex; flex-direction:column; gap:.6rem; }
-  .method-top{ display:flex; justify-content:space-between; align-items:flex-start; position:relative; z-index:1; }
-  .method-top svg{ width:21px; height:21px; color:var(--amber-bright); }
-  .method-days{ text-align:right; }
-  .method-days .num{ font-family:var(--font-mono); font-size:1.25rem; color:var(--violet-bright); font-variant-numeric:tabular-nums; }
-  .method-days .unit{ display:block; font-size:.66rem; color:var(--ink-faint); letter-spacing:.08em; text-transform:uppercase; }
-  .method-card h3{ font-size:1.02rem; color:var(--ink); position:relative; z-index:1; }
-  .method-card p{ font-size:.86rem; color:var(--ink-dim); line-height:1.55; position:relative; z-index:1; }
-  @media (max-width: 940px){ .method-grid{ grid-template-columns:repeat(2, 1fr); } }
-  @media (max-width: 520px){ .method-grid{ grid-template-columns:1fr; } }
+     Sizes/positions below no longer match that 1:1 measurement — on
+     request ("сильно выделяется, очень большие карточки, слишком
+     длинный по скролу... сделай компактнее... кучнее, но в беспорядке")
+     the whole composition was rescaled DOWN, not redrawn: width ×0.643
+     (420→270, 525→337 — matches the ~270-380px card widths the delivery
+     fan-cards and process carousel already use elsewhere on the page,
+     "сочетались с размером карточек в других блоках"), top ×0.5 (a
+     tighter squeeze than the width scale alone, since the ask was
+     denser packing on top of just smaller — 0.643 alone would have kept
+     the same relative gaps, only shrunk). left% is untouched (that's
+     what keeps the zigzag left/right stagger pattern — "сохрани
+     композицию и расположение"). min-height scaled to match so the
+     section's own scroll length drops with it (was 4292px). */
+  /* Decorative map cutout bleeding out of the left edge of the section,
+     behind everything (z-index:-1, safe even against the plain in-flow
+     section-head text since negative z-index paints before that, not
+     just before the cards) — on request ("разместить пнг обьект...
+     слева блока и выходить из-за боковой части блока, на заднем фоне
+     карточек... добавить прозрачности"). Low opacity doubles as cleanup
+     for the source PNG's own faint background-removal speckle noise. */
+  .services{ isolation:isolate; } /* contain the bg's z-index:-1 to this section */
+  .services-map-bg{
+    position:absolute; left:-160px; z-index:-1;
+    /* native pixel size, no downscaling, on request ("вставь в размере
+       котором она есть, не сжимай ничего") */
+    width:800px; height:867px;
+    opacity:.1; pointer-events:none; user-select:none;
+  }
+  .services-map-bg--north{ top:18px; }
+  /* South America — same size/opacity as the north piece, raised up to
+     sit by the "Таможенное оформление" heading and kept fully inside
+     the section (no left bleed), on request ("подними выше... без
+     вылета за левый край"). */
+  .services-map-bg--south{ top:980px; left:0; }
+  /* Japan — same size/opacity treatment, mirrored to bleed out of the
+     RIGHT edge instead of the left. Position is a placeholder; exact
+     top/right to be tuned once placement is picked visually. */
+  .services-map-bg--japan{ left:auto; right:-160px; top:218px; }
+  /* Africa — same right-edge bleed as Japan, placed underneath it.
+     Position is a placeholder; exact top/right to be tuned once
+     placement is picked visually. */
+  .services-map-bg--africa{ left:auto; right:0; top:1780px; }
+  /* Lives inside .work-grid (not .services) so its top offset shares the
+     same px coordinate space as the work-card tops — bottom edge lands
+     at ~815px, just past the "Таможенный контроль" card's photo frame
+     (--p2: top:220px + ~562px photo ≈ bottom 782px) without reaching
+     halfway into its caption text below (starts ~804px, ~104px tall),
+     on request ("торчал ниже рамки... но не наполовину задевал текст"). */
+  @media (max-width: 900px){ .services-map-bg{ display:none; } }
 
-  /* ================= PROCESS ================= */
-  .timeline{ display:grid; grid-template-columns:repeat(4, 1fr); gap:1.1rem; }
-  .step{ position:relative; display:flex; flex-direction:column; gap:.7rem; }
-  .step-num{ position:relative; width:50px; height:50px; border:1px solid var(--violet-bright); border-radius:50%; background:var(--bg-1); display:flex; align-items:center; justify-content:center; color:var(--violet-bright); flex-shrink:0; box-shadow:0 0 16px rgba(109,91,255,.3); }
-  .step-num svg{ width:23px; height:23px; }
-  .step-num span{ position:absolute; top:-8px; right:-8px; width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg,var(--amber-bright),var(--violet-bright)); color:#0c0a14; font-family:var(--font-mono); font-size:.66rem; font-weight:600; display:flex; align-items:center; justify-content:center; }
-  .step-text{ padding:.8rem 1rem; display:flex; flex-direction:column; gap:.4rem; flex:1; border-radius:20px; }
-  .step:hover .step-text{ transform:translateY(-3px); border-color:var(--glass-border-hover); }
-  .step h3{ font-size:.98rem; color:var(--ink); position:relative; z-index:1; }
-  .step p{ font-size:.85rem; color:var(--ink-dim); line-height:1.55; position:relative; z-index:1; }
-  @media (max-width: 940px){ .timeline{ grid-template-columns:repeat(2, 1fr); } }
-  @media (max-width: 560px){ .timeline{ grid-template-columns:1fr; gap:1.2rem; } .step{ flex-direction:row; align-items:flex-start; gap:1rem; } }
+  .work-grid{ position:relative; min-height:2340px; }
+  .work-card{ position:absolute; display:flex; flex-direction:column; isolation:isolate; }
+  /* Small haze behind each card, on request ("в блоке доставки дымка,
+     примени такую же отдельно к карточкам... небольшая дымка вокруг
+     каждой") — same rgba(30,30,34,·) wisp recipe as .fan-stage::before
+     in the delivery section, just ONE per card instead of one shared
+     panel behind a whole row, sized to that card rather than the fan's
+     full width. isolation:isolate above gives each .work-card its own
+     stacking context so this z-index:-1 layer only ever sits behind
+     THIS card's own media/caption, not behind unrelated sibling cards
+     it happens to overlap on screen (the cascade is absolutely
+     positioned and overlapping by design) — without it, a z-index:-1
+     child of a position:absolute-but-non-stacking element can escape to
+     the nearest ANCESTOR stacking context instead, landing behind the
+     wrong card. Extends past the card itself (negative inset) since
+     .work-card has no overflow:hidden of its own to clip it early. */
+  .work-card::before{
+    content:"";
+    position:absolute;
+    inset:-14% -22%;
+    z-index:-1;
+    pointer-events:none;
+    filter:blur(26px);
+    /* More intermediate stops (was 5, now 9) so the falloff reads as a
+       continuous fade instead of banded rings, plus color lightened
+       ~10% toward white, twice (30,30,34 -> 53,53,56 -> 73,73,76), on
+       request ("больше промежуточных... на 10% светлее" x2). */
+    background:radial-gradient(60% 62% at 50% 46%,
+      rgba(73,73,76,.11) 0%,
+      rgba(73,73,76,.09) 15%,
+      rgba(73,73,76,.07) 30%,
+      rgba(73,73,76,.05) 45%,
+      rgba(73,73,76,.035) 58%,
+      rgba(73,73,76,.022) 70%,
+      rgba(73,73,76,.013) 80%,
+      rgba(73,73,76,.006) 90%,
+      rgba(73,73,76,0) 100%);
+  }
+  /* p1/p3/p4 left% nudged from the rescale above — after compacting the
+     composition (previous pass), p3 (Честный Знак) sat close enough
+     beneath p1 (Международная логистика) that its top edge clipped
+     p1's last caption line, and p6 (Консолидация) did the same to p4
+     (Сертификация) beneath it. p1 and p4 shift right for more
+     horizontal clearance from the card overlapping their text; p3 also
+     moves up on request, safe now that p1's rightward shift already
+     clears the horizontal overlap between them. p4's first nudge (16%)
+     still left a real, measured overlap — p4's caption box at
+     x:[282,619] vs p6's photo at x:[76,346] y:[2166,2639] genuinely
+     intersected (a 64×42px corner) — 23% clears p6 on the left (~26px
+     margin) while staying clear of p3 on the right (~21px margin
+     against p3's own card at x:[730,1000]); that gap is real but
+     narrow, so re-measure both sides with getBoundingClientRect if
+     either neighbour's position/size changes again. */
+  .work-card--p1{ left:74%;   top:0;    width:270px; }
+  .work-card--p2{ left:0%;    top:220px;  width:337px; }
+  .work-card--p3{ left:50.8%; top:520px; width:270px; }
+  .work-card--p4{ left:23%;   top:1038px; width:337px; }
+  .work-card--p5{ left:67.7%; top:1394px; width:270px; }
+  .work-card--p6{ left:0%;    top:1692px; width:270px; }
+  .work-card__media{
+    position:relative; aspect-ratio:3/5; border-radius:var(--r-panel-lg);
+    border:3.3px solid rgba(255,255,255,.5); /* was 5px — 1.5× thinner on request */
+    background:var(--bg-alt); overflow:hidden; display:flex; align-items:center; justify-content:center;
+    /* dark (not gold) contact-shadow + an ambient shadow ringing the whole
+       perimeter (0-offset, just blur+spread) + a wide, low glow underneath
+       — the ambient ring is what actually reads as volume on all 4 sides,
+       not just a drop shadow hanging off the bottom. Static — no hover
+       movement. Softer + slightly tighter spread than the previous pass. */
+    box-shadow:
+      0 2px 2px rgba(24,21,15,.13),
+      0 0 0 1px rgba(24,21,15,.07),
+      0 0 41px 7px rgba(24,21,15,.26),
+      0 25px 38px -13px rgba(24,21,15,.64),
+      0 54px 81px -18px rgba(24,21,15,.49),
+      inset 0 1px 0 rgba(255,255,255,.7),
+      inset 0 -1px 0 rgba(24,21,15,.12);
+  }
+  /* barely-there glass sheen, painted above the photo */
+  .work-card__media::after{ content:""; position:absolute; inset:0; z-index:2; pointer-events:none; background:linear-gradient(135deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.04) 20%, transparent 40%); }
+  /* photo fills the frame edge-to-edge (cover, no letterbox). Source is
+     1794:3504 (≈0.512) vs the 3:5 (0.6) frame, so covering crops ~15%
+     total — object-position:top pins the crop to the BOTTOM (every
+     photo's signage/captions live in the top third; pallets/props sit
+     lower) so no caption text is lost. The img's own box is 138% tall,
+     anchored at top:0 so the whole 38% overshoot hangs below the frame —
+     script.js only ever pulls it further UP (never down, which would
+     open a gap at the top) for the on-scroll drift seen on the
+     reference site. The shift is 0 exactly when the card is centred in
+     the viewport (script.js), so the generous overshoot only ever gets
+     "spent" while the card is entering/leaving near the viewport edge —
+     not while it's actually being read. */
+  .work-card__media img{ position:absolute; left:0; top:0; z-index:1; width:100%; height:138%; object-fit:cover; object-position:center top; will-change:transform; }
+  /* Text scaled down alongside the card rescale above ("размер шрифта
+     скорректируй... чтобы гармонично смотрелся при новых размерах") —
+     not by the same ×0.643 as the cards (that would make the caption
+     too small to read comfortably at 6-8pt-equivalent); a gentler
+     reduction that still reads as clearly smaller/more compact next to
+     the photo. */
+  .work-card__caption{ margin-top:1.4rem; }
+  .work-card__caption h3{ font-family:var(--font-display); font-weight:500; font-size:clamp(1.25rem, 1.6vw, 1.45rem); color:var(--ink); }
+  .work-card__caption p{ margin-top:.4rem; font-size:.95rem; color:var(--ink-dim); line-height:1.5; max-width:32ch; }
+  @media (max-width: 900px){
+    .work-grid{ min-height:0; }
+    .work-card{ position:static !important; left:auto !important; top:auto !important; width:100% !important; max-width:420px; margin-bottom:2.5rem; }
+    .work-card:last-child{ margin-bottom:0; }
+  }
+
+  /* ================= DELIVERY — 3D perspective "fan" of REAL box geometry =====
+     Per reference boards: 4 tall cards standing in a shallow arc,
+     perspective on the row, outer two tilted ~18deg, inner two ~6deg,
+     hinging toward the centre so they read as a fan/corridor, not a flat
+     grid. NO real per-method photos exist yet (truck/train/ship/plane) —
+     .fan-card__ph is a neutral placeholder (the outline icon, large and
+     faint) standing in for a future photo. Swap the <span
+     class="fan-card__ph"> for an <img> once real photos are supplied.
+
+     The frame is an actual 3D box, not a flat image or gradient: each
+     card is preserve-3d and carries 4 thin white "wall" divs (top,
+     bottom, left, right) plus a .fan-card__face holding the real content,
+     pushed forward by half the wall thickness. Every wall div starts
+     straddling its edge of the card (centred exactly ON that edge, ±T/2)
+     and is rotated 90deg around ITS OWN CENTER — since that centre sits
+     exactly on the edge line, the rotation swings the strip from lying
+     flat (spanning the card's surface) to standing perpendicular
+     (spanning the depth axis instead), with the edge itself staying put.
+     That is real geometry: once the whole card is turned by its own
+     rotateY, the browser's own perspective projection makes the near
+     wall project wide and the far wall project to a sliver, with zero
+     per-card manual tuning — and it collapses back to an even, thin,
+     all-white rim automatically when rotateY returns to 0 on hover. */
+  /* perspective-origin Y must match the cards' own vertical center (measured
+     50% of .fan-stage's box), not an arbitrary offset. The stage is taller
+     than the cards, and align-items:flex-end plus asymmetric padding-block
+     put the cards' true center at 50% of the stage even though "30%" looks
+     plausible on paper. A mismatched origin makes the top and bottom walls
+     receive very different amounts of perspective foreshortening (verified:
+     top wall projected to ~16px on screen, bottom wall to ~44px, for the
+     same 14px CSS thickness) — the extreme, near-edge-on angle on the short
+     side then shows a visible stepped/aliased seam where its rounded corner
+     meets the side wall, while the other, gentler side renders smooth. */
+  /* Horizontal origin: was nudged off dead-center (50% → 44%) in an
+     earlier round to dodge a hover-state singularity on cards 2/3's
+     hinge wall. That fix came at a real cost, discovered later when true
+     left/right mirror symmetry was requested ("сделай такую же 2 и 4
+     только с разворотом"): a shared, off-center perspective-origin makes
+     left cards (1/2, closer to the vanishing point) project WIDER on
+     screen than their right-side mirror partners (4/3), even with
+     byte-for-byte identical --wall-t/rotation. Measured at 1600px
+     viewport: card1 210px vs card4 192px, card2 249px vs card3 236px —
+     not a small difference.
+
+     Re-tested the original singularity directly before reverting: swept
+     perspective-origin-x from 50% down to 45% at hover and screenshotted
+     card2/3's hinge corner tip every step, PLUS checked the then-current
+     44% for a control. The small triangular grey notch at that tip was
+     PIXEL-IDENTICAL at every value including 44% itself — proof this
+     specific artifact was never actually fixed by the 44% nudge; it's a
+     separate, always-present residual from the hinge-corner construction
+     (documented elsewhere in this file), not the vanishing-point
+     coincidence. So moving back to dead-center 50% doesn't reintroduce
+     anything that wasn't already there at 44% — it just restores true
+     mirror symmetry between 1↔4 and 2↔3, which is now confirmed exact
+     (getBoundingClientRect: card1 === card4, card2 === card3). If a
+     TRUE zero-width collapse (not this small notch, but a wall vanishing
+     completely) ever reappears at some other viewport, re-run that same
+     sweep-and-screenshot check before reaching for an origin shift again —
+     don't assume it's the same cause as this one was. */
+  .fan-stage{ perspective:750px; perspective-origin:50% 50%; padding-block:2.5rem 1.5rem; }
+  .fan-grid{ display:flex; justify-content:center; align-items:flex-end; gap:1.25rem; transform-style:preserve-3d; }
+  .fan-card{
+    position:relative;
+    flex:1 1 0; min-width:0; max-width:270px;
+    transform-style:preserve-3d;
+    transition:transform .4s ease;
+    will-change:transform;
+    --wall-t:14px;
+    /* Single source of truth for corner rounding: face and every wall read
+       THIS, never a literal px value of their own, so they can never drift
+       out of sync again. It is deliberately wall-t/2 (not smaller) — a
+       wall's rounded end is only a true, gapless semicircle cap at exactly
+       half its own thickness; anything less leaves a flat/square shoulder
+       on the wall that the face's matching-radius corner curves away from,
+       which reads as a small stray step right at the seam. This bit us
+       for real: cards 2-3 had wall+face radius numerically EQUAL (7px both,
+       verified via getComputedStyle) but --wall-t:50px, so that 7px was
+       nowhere near the wall's own half-thickness (25px) — equal-to-each-
+       other was not the same guarantee as equal-to-half-the-wall. */
+    --wall-radius: calc(var(--wall-t) / 2);
+  }
+  .fan-card--1{ transform:rotateY(-18deg); transform-origin:right center; }
+  /* Cards 2-3 raised from ±6deg to ±13deg on request, specifically to
+     shrink the residual seam ("beak") that remained on the hinge-side
+     corner even after the --wall-t:22px/--wall-radius:11px fix — that
+     artifact's root cause is the hinge wall's on-screen width, which
+     scales with sin(angle): sin(13deg)=0.225 vs sin(6deg)=0.105, so this
+     alone should roughly double that wall's screen presence without
+     matching 1/4's ±18deg outright (which would flatten the fan's varied
+     angles almost entirely — user chose the smaller, still-noticeable
+     bump instead). Re-check the corner seam and the fan's visual spread
+     after this change; --wall-t:22px on cards 2-3 (below) was tuned for
+     the OLD ±6deg and may now be more compensation than needed. */
+  .fan-card--2{ transform:rotateY(-13deg); transform-origin:right center; }
+  .fan-card--3{ transform:rotateY(13deg);  transform-origin:left center;  }
+  .fan-card--4{ transform:rotateY(18deg);  transform-origin:left center;  }
+  /* Plain rotateY(0deg) — a rotateY(0.01deg) "epsilon" was tried here
+     first to chase the hover gap described below, on the theory that an
+     EXACT 0deg was itself the degenerate case. Measured: it changed
+     nothing (still ~0.29px). The real cause turned out to be
+     perspective-origin's X position, not this angle — fixed on .fan-stage
+     instead (see its comment). Leaving this at a clean 0deg. */
+  .fan-card:hover, .fan-card.is-hovered{ transform:rotateY(0deg); z-index:5; }
+
+  .fan-card__face{
+    position:relative; display:flex; flex-direction:column;
+    border-radius:var(--wall-radius); overflow:hidden;
+    background:#fff;
+    transform:translateZ(calc(var(--wall-t) / 2));
+  }
+  /* .fan-card__walls only exists to group the 4 wall divs in markup — it
+     carries NO border-radius/overflow/clip-path of its own. Tried masking
+     it that way (border-radius + overflow:hidden, and separately
+     clip-path) to auto-round the square wall ends against the face's
+     22px curve; both collapse every wall to zero width in testing,
+     confirmed via getBoundingClientRect. Clipping a preserve-3d subtree
+     forces the browser to flatten it to 2D first, which erases the very
+     Z-depth the walls exist to show — so no clip on this box, ever. The
+     square-vs-round corner mismatch stays a cosmetic tradeoff, not a mask. */
+  .fan-card__walls{ position:absolute; inset:0; transform-style:preserve-3d; pointer-events:none; }
+  /* No will-change here or on .fan-card__wall (tried on both, reverted):
+     will-change promotes an element to its OWN compositor layer. Only
+     .fan-card itself is actually animating (its rotateY transitions);
+     the face and all 4 walls are static and must stay merged into ONE
+     paint/layer with their parent so they move as a single rigid unit.
+     Promoting the 4 wall siblings to independent layers (5 layers total
+     inside one preserve-3d group) risked each layer being recomposited on
+     a slightly different tick, which reads as fragments of the frame not
+     disappearing in sync during the hover-flatten transition. NOTE:
+     backface-visibility:hidden was tried here too and reverted — these
+     wall strips are the actual SIDES of the box (rotateX(90deg)/
+     rotateY(±90deg)), so their default front face legitimately points
+     away from the camera by construction at these angles; hiding "back
+     faces" hid the walls themselves on every card, not just during the
+     transition. Do not re-add either property to the walls. */
+  .fan-card__wall{ position:absolute; background:#fff; border-radius:var(--wall-radius); }
+  .fan-card__wall--top{ left:0; width:100%; height:var(--wall-t); top:calc(var(--wall-t) / -2); transform:rotateX(90deg); }
+  .fan-card__wall--bottom{ left:0; width:100%; height:var(--wall-t); bottom:calc(var(--wall-t) / -2); transform:rotateX(-90deg); }
+  .fan-card__wall--left{ top:0; height:100%; width:var(--wall-t); left:calc(var(--wall-t) / -2); transform:rotateY(-90deg); }
+  .fan-card__wall--right{ top:0; height:100%; width:var(--wall-t); right:calc(var(--wall-t) / -2); transform:rotateY(90deg); }
+
+  /* Frame style (wall thickness, corner rounding, white walls, hover-
+     flatten) is shared by all 4 cards via .fan-card / .fan-card__face /
+     .fan-card__wall above. Card 1/4 use the untouched base values
+     (--wall-t:14px, --wall-radius: its default wall-t/2 = 7px) — reference,
+     do not change.
+
+     Cards 2-3 tilt only ±6deg (vs ±18deg on 1/4), so the same 14px/7px
+     wall+radius reads thinner and flatter on screen at that shallow angle.
+     --wall-t:22px / --wall-radius:11px below keeps the exact same wall-t/2
+     ratio as 1/4 (a true semicircle cap, same "volumetric" construction —
+     not a different formula), just scaled up, which is what actually
+     makes a corner read as rounded rather than flat. This value in
+     particular was chosen because it stayed clean at matched-zoom
+     screenshots on all 4 corners, both idle and hover, without the seam
+     artifacts that showed up at larger scale-ups (30-50px) tried earlier.
+     A slight residual softness can remain specifically at the hinge-side
+     corner (the tip of --wall-t/2's curve, on whichever side
+     transform-origin below puts the hinge) — inherent to approximating a
+     rounded 3D corner from independently-rotated flat strips at a shallow
+     angle, not something to keep chasing with further tuning here. */
+  /* Cards 2-3 now tilt ±13deg (raised from ±6deg — see .fan-card--2/--3
+     transform rules above), so they need LESS compensation here than the
+     22px this used to be tuned for. Re-measured after the angle change:
+     at --wall-t:14px (matching 1/4's own value exactly) the hinge-side
+     wall is still much thinner on screen than 1/4's (~1.7px vs card 1's
+     ~8px) because ±13deg still exposes less of it than ±18deg — so some
+     compensation still helps — but every px of EXTRA --wall-t beyond
+     what's needed also directly enlarges the residual hinge-corner seam
+     (proven repeatedly: 45px had an obvious "beak", 22px a small one,
+     confirmed again by a fresh screenshot after the angle change showing
+     a visible light wedge at the seam). --wall-t:16px was tried as the
+     balance here (little above the bare 14px, leaning less on thickness
+     and its seam cost since the angle now does most of the prominence
+     work) — kept for card 2, but card 3 was reverted back to 22px/11px
+     on request (thickness only; the ±13deg angle and the photo-on-walls
+     background stay as they are on both cards).
+
+     Card 2 later moved off 16px onto card 3's own 22px/11px on direct
+     request ("у второй такую же как у 3") — cards 2 and 3 now share
+     IDENTICAL wall geometry, only their tilt direction/photo differ. */
+  .fan-card--2{ --wall-t:22px; --wall-radius:11px; }
+  .fan-card--3{ --wall-t:22px; --wall-radius:11px; }
+
+  /* Tried and reverted: extending the top/bottom walls' width past the
+     hinge edge (a "lap joint" to back the seam with matching material,
+     leaving the side wall untouched) on the theory that it would hide
+     behind the side wall and paper over the hinge-corner "beak". Screen-
+     shots showed the opposite: at this shallow a viewing angle the side
+     wall itself is too thin on screen to occlude anything behind it, so
+     the extended tab stuck out as its own new, more obvious rectangular
+     flap past the rounded corner — worse than the beak it was meant to
+     hide. Do not re-add without solving that occlusion problem first. */
+
+  /* Photo-on-walls: originally cards 2-3 only, extended to ALL FOUR cards
+     on request ("во всех карточках продолжение фотографии как в
+     карточке 3") — every card's own photo now bleeds onto its own 3D
+     depth walls, not just the front face. Card 1 uses delivery-truck.jpg,
+     card 4 uses delivery-air.jpg, same treatment as rail/sea on 2-3.
+
+     All four source photos share the identical 900x1599 native size
+     (verified via naturalWidth/naturalHeight), and all four faces render
+     at the same 270x516 box, so the SAME crop math applies unchanged to
+     every card.
+
+     Two approaches were tried before this one, both rejected on direct
+     feedback:
+     1) Reveal the true ~10px margin object-fit:cover's OWN minimal crop
+        hides, magnified ~28x to fill --wall-t. Real pixels, but a 900px
+        source sliver only 10px wide has almost no detail left once blown
+        up that much — read as "some random patch of background", not a
+        continuation.
+     2) Un-magnified duplicate of the face's own edge strip (native face
+        scale, just repositioned). Sharp/recognizable, but it's literally
+        the SAME pixels already visible on the face repeated onto the
+        wall — not a continuation either, just a copy ("а это продолжение
+        фото или ещё раз вставленное фото? мне кажется это дублирование").
+
+     This version fixes both: .fan-card__img now carries transform:
+     scale(1.12) (see its own rule), deliberately over-cropping the face
+     beyond object-fit:cover's bare minimum. That manufactures a REAL,
+     generous margin of never-shown source pixels on all four sides (not
+     just the old accidental left/right one), big enough that revealing
+     it needs no extra magnification — genuinely different image content,
+     immediately adjacent to the visible frame, at native sharpness.
+
+     Scaled image size at 1.12x: 290.43*1.12 = 325.28px wide,
+     516*1.12 = 577.92px tall. Margin beyond the 270x516 visible window:
+     (325.28-270)/2 = 27.64px each side horizontally, (577.92-516)/2 =
+     30.96px each side vertically — both comfortably bigger than the
+     largest --wall-t in use (22px), so every wall shows only genuinely
+     new pixels, never doubling back into the visible window.
+
+     Each wall anchors background-position at the boundary between the
+     visible window and its own margin, then lets the wall div's own
+     width/height (--wall-t) clip how much of that margin shows — so
+     THICKER walls (cards 2/3, 22px) reveal correspondingly MORE of the
+     hidden margin than thinner ones (cards 1/4, 14px), which is the
+     physically-sensible direction (a deeper box edge should show more of
+     what's just outside the frame). Left/top use
+     calc(var(--wall-t) - margin) since their revealed slice grows
+     BACKWARD from the boundary as --wall-t increases; right/bottom
+     anchor at a fixed offset since their slice grows forward and the
+     div's own size does the clipping.
+
+     background-size is the same fixed 325.28x577.92 on all four walls of
+     every card, regardless of --wall-t — only background-position (which
+     slice of that fixed image shows) differs per side. The left/right →
+     physical-side mapping is the same on every card regardless of
+     rotateY direction/pivot side (1/2 hinge right, 3/4 hinge left, mirror
+     images of each other) — the per-card tilt rotates the whole box as
+     one rigid unit, it doesn't change which wall div is on which side.
+
+     All figures here (1.12 zoom, 325.28/577.92, 27.64/30.96 margins) are
+     specific to this 900x1599 source at this 270x516 crop and this
+     chosen zoom factor — would need recalculating for a different image,
+     crop, or zoom amount. */
+  /* background-color is a DARK NAVY FALLBACK (matching all four photos'
+     dusk-sky tone), not transparent. Found via screenshot at hover: right
+     at rotateY(0) (hover-flattened), a side wall's OWN rotateY(90deg)
+     plus the card's now-zero rotateY lands it at EXACTLY 90deg from the
+     camera — a precise edge-case (idle states sit at 90±13/±18deg, never
+     exactly 90) where the browser can fail to rasterize the large,
+     heavily-scaled background-image into that near-zero-width sliver,
+     leaving it unpainted. With transparent that showed the grey page
+     background through a thin gap. Opaque fallback color fixes it. */
+  .fan-card--1 .fan-card__wall,
+  .fan-card--2 .fan-card__wall,
+  .fan-card--3 .fan-card__wall,
+  .fan-card--4 .fan-card__wall{
+    background-color:#1e2733;
+    background-repeat:no-repeat;
+  }
+  .fan-card--1 .fan-card__wall{ background-image:url(images/delivery-truck.jpg); }
+  .fan-card--2 .fan-card__wall{ background-image:url(images/delivery-rail.jpg); }
+  .fan-card--3 .fan-card__wall{ background-image:url(images/delivery-sea.jpg); }
+  .fan-card--4 .fan-card__wall{ background-image:url(images/delivery-air.jpg); }
+
+  .fan-card--1 .fan-card__wall--left,
+  .fan-card--2 .fan-card__wall--left,
+  .fan-card--3 .fan-card__wall--left,
+  .fan-card--4 .fan-card__wall--left{
+    background-size:325.28px 577.92px;
+    background-position:calc(var(--wall-t) - 27.64px) -30.96px;
+  }
+  .fan-card--1 .fan-card__wall--right,
+  .fan-card--2 .fan-card__wall--right,
+  .fan-card--3 .fan-card__wall--right,
+  .fan-card--4 .fan-card__wall--right{
+    background-size:325.28px 577.92px;
+    background-position:-297.64px -30.96px;
+  }
+  .fan-card--1 .fan-card__wall--top,
+  .fan-card--2 .fan-card__wall--top,
+  .fan-card--3 .fan-card__wall--top,
+  .fan-card--4 .fan-card__wall--top{
+    background-size:325.28px 577.92px;
+    background-position:-27.64px calc(var(--wall-t) - 30.96px);
+  }
+  .fan-card--1 .fan-card__wall--bottom,
+  .fan-card--2 .fan-card__wall--bottom,
+  .fan-card--3 .fan-card__wall--bottom,
+  .fan-card--4 .fan-card__wall--bottom{
+    background-size:325.28px 577.92px;
+    background-position:-27.64px -546.96px;
+  }
+
+  /* A corner-patch ::after (small rounded piece nudged toward camera to
+     cover the hinge seam) was tried here and reverted. It was built to
+     fix a grey gap seen in a user screenshot at their own window size —
+     but a direct A/B test (patch via display:none vs not) at this repo's
+     standard test viewport showed the patch ITSELF creating a visible
+     dark "beak" that wasn't there without it, across every size/radius
+     variant tried (rounded, flat, wide, narrow). The plain wall geometry
+     alone (no patch) rendered clean at that viewport. The original grey
+     gap is real but viewport/subpixel-dependent (same family of issue as
+     the perspective-origin hover singularity fixed earlier). Replaced
+     that whole approach with the simpler fix below: a static full-card
+     photo backing sitting behind the face/walls, so instead of chasing
+     the exact pixel of the gap, ANY gap that opens anywhere on the rim
+     just reveals more of the same photo instead of the grey page. */
+  /* Extended to all four cards alongside the wall-photo treatment above
+     ("не забудь про подложку фона в стыке") — 1 and 4 now also have
+     background-image walls, so they're subject to the exact same
+     rasterization-failure risk at the hover singularity / hinge seam that
+     this backing was built to cover for 2/3. Without it, cards 1/4 would
+     show the grey page through the same kind of gap. */
+  .fan-card--1::before,
+  .fan-card--2::before,
+  .fan-card--3::before,
+  .fan-card--4::before{
+    content:"";
+    position:absolute;
+    /* inset:-3px (a uniform oversize past the card's own footprint) was
+       tried here to close a tiny sub-pixel gap at the hover-flattened
+       corner tip — but a uniform oversize is wrong: this pseudo-element
+       has no transform of its own, so it sits flat inside the card's own
+       preserve-3d box and gets carried along by the card's rotateY like
+       everything else. The hinge-side edge sits right at (or very near)
+       transform-origin, so it barely foreshortens — while the real hinge
+       wall on top of it IS foreshortened to a thin sliver at this shallow
+       idle tilt. Net effect: the 3px margin projects almost undistorted
+       along the ENTIRE hinge edge and pokes out past the thin wall as an
+       obvious parallel "second frame" the full height of the card (caught
+       in a user screenshot) — not just at the corner tip it was meant to
+       patch. Back to inset:0, exactly matching the card's own footprint:
+       clean along every edge at idle. The tiny hover-tip wedge this
+       introduced is a smaller, sub-pixel residual — do not re-chase it
+       with a uniform oversize again; if it needs fixing, it has to be
+       local to that one corner's tip, not a margin on all 4 sides. */
+    inset:0;
+    z-index:-1;
+    border-radius:var(--wall-radius);
+    background-color:#1e2733;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
+  }
+  .fan-card--1::before{ background-image:url(images/delivery-truck.jpg); }
+  .fan-card--2::before{ background-image:url(images/delivery-rail.jpg); }
+  .fan-card--3::before{ background-image:url(images/delivery-sea.jpg); }
+  .fan-card--4::before{ background-image:url(images/delivery-air.jpg); }
+  /* Squares off the backing's own corner on whichever side is the card's
+     HINGE (transform-origin) side — seen in a user screenshot: a real grey
+     wedge at that exact corner, poking just past the rounded curve itself
+     (where the two independently-rotated wall strips fail to meet exactly,
+     see the wall-radius comment above), so a backing rounded to match the
+     card's own silhouette can't reach it there — inset:0 stops short of
+     covering it, and a *uniform* oversize was already tried and reverted
+     (bled a visible parallel edge the full height of the card, see the
+     inset comment above). Squaring off only the two hinge-side corners
+     fills exactly that gap without moving the backing's straight edges
+     anywhere else, so it can't bleed past the card's flat sides again. */
+  .fan-card--1::before,
+  .fan-card--2::before{
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+  }
+  .fan-card--3::before,
+  .fan-card--4::before{
+    border-top-left-radius:0;
+    border-bottom-left-radius:0;
+  }
+
+  .fan-card__photo{ position:relative; aspect-ratio:4/5; overflow:hidden; background:linear-gradient(160deg, var(--bg-alt), #e4ded2); display:flex; align-items:center; justify-content:center; }
+  .fan-card__photo::before{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(24,21,15,.28), transparent 45%); }
+  /* scale(1.12): deliberately over-crops the face beyond object-fit:cover's
+     own minimum, so a real margin of unseen source pixels exists on ALL
+     FOUR sides (not just the accidental ~10px left/right one aspect
+     mismatch used to give) for the walls below to reveal — see the big
+     photo-on-walls comment near .fan-card__wall for why this replaced an
+     earlier version that just duplicated the face's own edge pixels. */
+  .fan-card__img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:scale(1.12); display:block; }
+  .fan-card__ph{ width:34%; color:var(--ink-faint); opacity:.4; }
+  .fan-card__ph svg{ width:100%; height:auto; display:block; }
+  .fan-card__days{ position:absolute; top:1.1rem; right:1.5rem; z-index:1; text-align:right; }
+  .fan-card__days .num{ font-family:var(--font-mono); font-weight:600; font-size:1.4rem; color:#fff; font-variant-numeric:tabular-nums; text-shadow:0 2px 8px rgba(0,0,0,.4); }
+  .fan-card__days .unit{ display:block; font-size:.62rem; color:rgba(255,255,255,.85); letter-spacing:.1em; text-transform:uppercase; }
+  .fan-card__info{ padding:1.1rem 1.1rem 1.3rem; display:flex; flex-direction:column; gap:.5rem; }
+  .fan-card__icon{ width:34px; height:34px; display:flex; align-items:center; justify-content:center; border:1px solid var(--line-strong); border-radius:50%; color:var(--accent); background:rgba(255,255,255,.6); }
+  .fan-card__icon svg{ width:17px; height:17px; }
+  .fan-card__info h3{ font-size:1.02rem; color:var(--ink); }
+  .fan-card__info p{ font-size:.86rem; color:var(--ink-dim); line-height:1.55; }
+
+  /* ---- 3 real-photo treatments, per card ----
+     1-2: photo fills the entire card, white text block removed outright.
+     3: photo still fills the whole card, but the info block is kept and
+        folded INTO it as a dark scrim overlay instead of a separate panel.
+     4: unchanged split layout — photo confined to the top .fan-card__photo
+        area only, solid white info panel stays below it as before.
+     The row sits on the site's own light background — no solid dark box
+     behind it. A dispersing fog sits behind the cards instead of a flat
+     panel: a ::before layer, sized LARGER than .fan-stage itself (inset
+     goes negative on top/bottom) so nothing crops to a rectangle there,
+     carrying five stacked radial-gradients — one soft wisp centred behind
+     each of the 4 cards (so the gaps between cards get haze too, not just
+     the row as a block) plus one wide ambient wash behind the whole row —
+     each fading through opacity stops so there is no hard edge to catch
+     the eye, then blurred as a whole for extra dissolve. Left/right are
+     NOT bled outward: they're inset by a flat 40px from .fan-stage's own
+     edges, which is exactly the gap between .delivery's default .container
+     padding (clamp(1rem,2.5vw,2.25rem), which .fan-stage already sits
+     inside with no extra horizontal padding of its own) and .services
+     .container's wider padding (that same clamp() PLUS 40px, line ~331) —
+     the clamp() term is identical on both, so the two containers' content
+     edges always differ by exactly that flat 40px regardless of viewport
+     width. That keeps the haze's total width matched to the "Наши услуги"
+     section's content column instead of stretching near edge-to-edge.
+     .fan-grid is lifted to its own stacking layer (z-index:1) so the fog
+     stays strictly behind the cards despite sharing the same containing
+     block. */
+  .delivery{ isolation:isolate; } /* contain the bg's z-index:-1 to this section, same trick as .services */
+  /* Decorative map cutout, same recipe as the services-map-bg pieces
+     (native pixel size box, low opacity, no interaction) — placement is
+     a placeholder pending visual direction. */
+  .delivery-map-bg{
+    position:absolute; left:-160px; top:18px; z-index:-1;
+    width:700px; height:759px;
+    opacity:.1; pointer-events:none; user-select:none;
+  }
+  @media (max-width: 900px){ .delivery-map-bg{ display:none; } }
+  .fan-stage{ position:relative; padding:2.5rem 1.5rem; }
+  .fan-stage::before{
+    content:"";
+    position:absolute;
+    top:-22%; bottom:-22%; left:40px; right:40px;
+    z-index:0;
+    pointer-events:none;
+    filter:blur(34px);
+    /* Alphas divided by 1.5, then halved again on a follow-up request
+       ("менее тёмную дымку... на 0.5") — same five wisps, same spread,
+       progressively lighter haze each pass. */
+    background:
+      radial-gradient(38% 55% at 14% 55%, rgba(30,30,34,.14) 0%, rgba(30,30,34,.085) 30%, rgba(30,30,34,.045) 52%, rgba(30,30,34,.015) 72%, rgba(30,30,34,0) 100%),
+      radial-gradient(38% 55% at 39% 48%, rgba(30,30,34,.14) 0%, rgba(30,30,34,.085) 30%, rgba(30,30,34,.045) 52%, rgba(30,30,34,.015) 72%, rgba(30,30,34,0) 100%),
+      radial-gradient(38% 55% at 63% 48%, rgba(30,30,34,.14) 0%, rgba(30,30,34,.085) 30%, rgba(30,30,34,.045) 52%, rgba(30,30,34,.015) 72%, rgba(30,30,34,0) 100%),
+      radial-gradient(38% 55% at 88% 55%, rgba(30,30,34,.14) 0%, rgba(30,30,34,.085) 30%, rgba(30,30,34,.045) 52%, rgba(30,30,34,.015) 72%, rgba(30,30,34,0) 100%),
+      radial-gradient(70% 85% at 50% 55%, rgba(30,30,34,.10) 0%, rgba(30,30,34,.06) 38%, rgba(30,30,34,.025) 62%, rgba(30,30,34,.01) 82%, rgba(30,30,34,0) 100%);
+  }
+  .fan-grid{ position:relative; z-index:1; }
+  .fan-card--photo-full .fan-card__photo{ aspect-ratio:270/516; }
+  .fan-card--photo-overlay .fan-card__face{ position:relative; }
+  .fan-card--photo-overlay .fan-card__photo{ position:absolute; inset:0; aspect-ratio:auto; }
+  .fan-card--photo-overlay .fan-card__face{ aspect-ratio:270/516; }
+  .fan-card--photo-overlay .fan-card__info{
+    position:absolute; left:0; right:0; bottom:0; z-index:2;
+    background:linear-gradient(180deg, transparent, rgba(10,12,18,.55) 40%, rgba(10,12,18,.92));
+    padding-top:2.5rem;
+  }
+  .fan-card--photo-overlay .fan-card__icon{ border-color:rgba(255,255,255,.4); background:rgba(255,255,255,.12); color:var(--accent-bright); }
+  .fan-card--photo-overlay .fan-card__info h3{ color:#fff; }
+  .fan-card--photo-overlay .fan-card__info p{ color:rgba(255,255,255,.72); }
+  @media (max-width: 940px){
+    .fan-stage{ perspective:none; }
+    .fan-grid{ flex-wrap:wrap; gap:1.5rem; }
+    .fan-card{ flex:1 1 calc(50% - 1.5rem); max-width:none; transform:none !important; }
+    .fan-card__face{ box-shadow:var(--card-shadow); }
+    .fan-card__walls{ display:none; }
+    .fan-card:hover{ transform:translateY(-5px) !important; }
+  }
+  @media (max-width: 560px){ .fan-card{ flex:1 1 100%; } }
+
+  /* ================= COUNTER BAND ================= */
+  .counter-band{ position:relative; padding-block:clamp(3rem, 6vw, 5rem); background-size:cover; background-position:center; overflow:hidden; }
+  .counter-band__overlay{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,13,20,.74), rgba(10,13,20,.88)); }
+  .counter-band__inner{ position:relative; z-index:1; text-align:center; }
+  .counter-band h2{ margin-top:.8rem; font-size:var(--fs-h2); color:#fff; max-width:24ch; margin-inline:auto; }
+  .counter-band h2 em{ font-style:italic; color:var(--accent-bright); }
+  .counter-band .stats-panel{ margin-top:clamp(2.2rem, 4.5vw, 3.2rem); border-top-color:rgba(255,255,255,.18); }
+  .counter-band .stats-panel .stat{ border-left-color:rgba(255,255,255,.18); }
+  .counter-band .stat-num{ color:#fff; }
+  .counter-band .stat-label{ color:rgba(255,255,255,.6); }
+  .eyebrow--light{ background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.25); color:#fff; }
+  .eyebrow--light::before{ background:var(--accent-bright); }
+
+  /* ================= PROCESS / CONVEYOR ================= */
+  /* Base state is a plain responsive grid — works with no JS and matches
+     the old .timeline layout it replaced. JS (script.js) adds .is-live
+     to .conveyor ONLY when the viewport is wide enough AND the user
+     hasn't asked for reduced motion; that's the only thing that switches
+     .conveyor__cards from a static grid into the 3D rotating stack below.
+     Never assume .is-live is present.
+
+     .conveyor-card itself is just a positioning box (no visible surface
+     of its own) — all the actual card look lives on .card-face, a
+     separate child pinned to the front with translateZ(depth/2). Four
+     more children, .card-edge-left/right/top/bottom, are the box's
+     visible sides (a full 3D frame, same 4-wall construction as the
+     delivery fan-cards' .fan-card__wall) — inert in the static grid
+     (never shown, no rotation happening) and only come alive under
+     .is-live. Left/right alternate — exactly one of the two is revealed
+     per side card, whichever faces back toward the centre, via the
+     .side-left/.side-right class JS sets each tick — while top/bottom
+     show on every non-active card unconditionally (their reveal comes
+     from perspective-origin's fixed vertical offset, not from which
+     side of centre the card sits on, so there's no left/right-style
+     alternation for them). See the .is-live rules below for why. */
+  .conveyor-card{
+    --depth:18px;
+    position:relative;
+    min-height:560px;
+  }
+  .card-face{
+    position:relative;
+    height:100%;
+    display:flex; flex-direction:column;
+    background:linear-gradient(165deg, #232b34, var(--ink) 82%);
+    border-radius:0;
+    padding:1.8rem 1.6rem 0;
+    color:#fff;
+    box-shadow:var(--card-shadow);
+    overflow:hidden;
+  }
+  /* Body is pinned to exactly 20% of the card's height (a flex-basis
+     percentage resolves against the column's cross size), so its
+     padding is kept tight — grow it only alongside --min-height above,
+     never independently, or the longest copy (3-line paragraphs) will
+     clip against card-face's overflow:hidden. */
+  .conveyor-card__top{ position:relative; flex:1; display:flex; align-items:flex-start; }
+  /* Photo bleeds past .conveyor-card__top's own box to the card's real
+     top/left/right edges (negative inset matching card-face's own
+     padding) — card-face's overflow:hidden does the actual clipping to
+     the rounded corners, same trick .conveyor-card__body uses below for
+     its own horizontal bleed. Bottom stays at 0: the photo meets the
+     white body exactly at that boundary, no bleed past it. */
+  .conveyor-card__photo{ position:absolute; top:-1.8rem; left:-1.6rem; right:-1.6rem; bottom:0; z-index:0; background:#1c2027; }
+  .conveyor-card__photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  /* Number moved onto the white body (top-right corner) on request — it
+     used to sit as a dark pill over the photo; on white it reads fine as
+     plain coloured numerals, no pill/background needed. h3 gets
+     padding-right so its own text doesn't run under the number instead
+     of wrapping around it. */
+  .conveyor-card__body{
+    position:relative;
+    flex:0 0 20%;
+    min-height:0;
+    margin-left:-1.6rem; margin-right:-1.6rem;
+    background:#fff;
+    padding:.55rem 1.6rem .65rem;
+  }
+  /* Bottom-right corner, not top — request was "там больше места",
+     since the title+paragraph block sits at the TOP of the body and
+     rarely reaches the bottom-right corner, so a bigger numeral fits
+     there without a padding-right reservation on h3 fighting it for
+     space the way the top-right placement needed. Sized up accordingly
+     ("нумерация... получше заметна"). */
+  .conveyor-card__num{
+    position:absolute;
+    bottom:.5rem; right:1.6rem;
+    font-family:var(--font-mono); font-size:1.7rem; font-weight:600;
+    color:var(--accent-bright); font-variant-numeric:tabular-nums; line-height:1;
+  }
+  .conveyor-card__body h3{ margin-top:0; font-size:1.05rem; color:var(--ink); }
+  .conveyor-card__body p{ margin-top:.3rem; font-size:.82rem; color:var(--ink-faint); line-height:1.4; }
+  .card-edge-left, .card-edge-right, .card-edge-top, .card-edge-bottom{ display:none; }
+
+  .process{ isolation:isolate; } /* contain the bg's z-index:-1 to this section, same trick as .services/.delivery */
+  /* Decorative map cutouts, same recipe as services/delivery — Malta
+     bleeding off the left, Bali off the right, top. Placeholder
+     placement pending visual direction. */
+  .process-map-bg{
+    position:absolute; z-index:-1;
+    width:400px; height:434px;
+    opacity:.1; pointer-events:none; user-select:none;
+  }
+  .process-map-bg--malta{ left:0; top:518px; }
+  .process-map-bg--bali{ right:0; top:-182px; }
+  @media (max-width: 900px){ .process-map-bg{ display:none; } }
+  .conveyor{ position:relative; display:flex; align-items:center; gap:.6rem; }
+  .conveyor__cards{ flex:1; min-width:0; display:grid; grid-template-columns:repeat(4, 1fr); gap:1.1rem; outline:none; }
+  @media (max-width: 940px){ .conveyor__cards{ grid-template-columns:repeat(2, 1fr); } }
+  @media (max-width: 560px){ .conveyor__cards{ grid-template-columns:1fr; gap:1.2rem; } }
+
+  .conveyor__arrow{ display:none; }
+  .conveyor__dots{ display:none; }
+
+  /* Live conveyor — a real 3D carousel, not a flat translateX+opacity
+     slide: .conveyor__cards is the "scene" (perspective) and both it and
+     every .conveyor-card are transform-style:preserve-3d, so the rotateY
+     below actually turns the cards in depth instead of flattening to 2D
+     (that flattening is exactly what a MISSING preserve-3d on either
+     level looks like — a symptom to check first if this ever regresses
+     back to feeling flat). Every card sits on the same centre point
+     (position:absolute, top/left:50%); the entire visual arrangement
+     comes from the transform JS writes every tick via --tx/--tz/--ry/
+     --sc/--op custom properties, per the offset table:
+       offset 0: x0    z0     ry0deg   scale 1     op 1
+       offset 1: x430  z-160  ry32deg  scale .86   op .88
+       offset 2: x760  z-420  ry48deg  scale .58   op .32
+       offset >2: hidden (op 0, pointer-events off) — 5 cards visible,
+       but offset 1 is unchanged from the 3-up layout; offset 2 is a
+       receding background pair well past it, not a size step down
+     — sign of x/ry flips with which side of the active card a given
+     card is on, so left/right are mirror images. Distance-from-active
+     wraps around all 8 cards both ways (see script.js), so this is a
+     continuous belt: nothing teleports at the ends, cards just keep
+     orbiting through the centre. */
+  .conveyor.is-live .conveyor__cards{
+    position:relative;
+    display:block;
+    height:clamp(630px, 56vw, 713px);
+    perspective:1200px;
+    perspective-origin:50% 40%;
+    transform-style:preserve-3d;
+  }
+  .conveyor.is-live .conveyor-card{
+    position:absolute;
+    top:50%; left:50%;
+    --card-w:clamp(320px, 26vw, 380px);
+    width:var(--card-w);
+    margin:0;
+    transform-style:preserve-3d;
+    transform:translate(-50%, -50%) translateX(var(--tx, 0)) translateZ(var(--tz, 0)) rotateY(var(--ry, 0deg)) scale(var(--sc, 1));
+    z-index:var(--z, 1);
+    transition:transform .7s cubic-bezier(.65,0,.35,1), --depth .7s cubic-bezier(.65,0,.35,1);
+    will-change:transform;
+    cursor:pointer;
+  }
+  .conveyor.is-live .conveyor-card.is-active{ cursor:default; }
+  /* opacity:var(--op) lives on .card-face and every .card-edge-* below —
+     deliberately NOT on .conveyor-card itself, even though --op is set
+     there by script.js and would inherit down fine either way. Chromium
+     rasterizes an opacity<1 element into a flattened layer to composite
+     the blend, and doing that to a preserve-3d element whose child is
+     rotated to a steep angle (our edges sit close to edge-on toward the
+     camera) makes it collapse that child to a genuinely zero-width paint
+     — confirmed via getBoundingClientRect() (0px, not just visually
+     faint) and bisected down to this exact cause: toggling JUST this
+     element's opacity between 1 and .88 in an isolated repro flipped the
+     edge between rendering normally and vanishing outright, everything
+     else identical. Putting opacity on the LEAF paint layers instead
+     (each with no 3D children of its own to flatten) sidesteps the whole
+     interaction and looks identical when nothing is rotated to an
+     extreme angle. Do not move opacity back onto .conveyor-card. */
+  .conveyor.is-live .card-face{
+    position:absolute; inset:0;
+    transform:translateZ(calc(var(--depth) / 2));
+    backface-visibility:hidden;
+    opacity:var(--op, 1);
+    /* Stronger than --card-shadow (the site-wide default used on other
+       cards) on request ("тень слабо видно, увеличить") — a bespoke,
+       more pronounced shadow just for these tilted 3D cards rather than
+       bumping the shared variable, which other, flat, non-3D cards
+       elsewhere on the page also use and don't need darkened. */
+    box-shadow:0 2px 3px rgba(24,21,15,.10), 0 34px 56px -20px rgba(24,21,15,.42);
+    transition:opacity .7s cubic-bezier(.65,0,.35,1);
+  }
+  /* Floor reflection (a rotateX-folded, photo-backed pseudo-element)
+     tried and removed on request ("убери вообще отражение") — went
+     through several revisions (box-reflect → gradient-only → +photo →
+     direction fix) documented in prior history; a plain box-shadow
+     below on .card-face is the only "grounding" cue now. */
+  /* Opaque backing, same trick as the delivery fan-cards' own ::before
+     ("а это подложка фона в стыке"): sits with NO transform of its own,
+     so it stays at this card's local z=0 — behind .card-face (pushed to
+     +depth/2) and spanning the same z range the edges sweep through
+     (±depth/2) — filling the box's core. Two adjoining 3D-rotated planes
+     (an edge and the face, or two edges at a corner) can leave a hairline
+     rendering gap from GPU rasterization rounding, no matter how exactly
+     their geometry lines up on paper; without this, that hairline shows
+     the page behind the card. With it, the same gap just reveals more of
+     this backing — dark where the photo zone is, white where the body
+     is, at the same 81.03% split as the edges use, so a gap reads as
+     "more of the same surface" instead of a stray light/dark seam line
+     (reported both ways: dark line against the white zone, light line
+     against the dark one — exactly what an uncovered page-background
+     hairline looks like against each). */
+  .conveyor.is-live .conveyor-card::before{
+    content:"";
+    position:absolute; inset:0;
+    z-index:-1;
+    border-radius:0;
+    pointer-events:none;
+    opacity:var(--op, 1);
+    background-repeat:no-repeat, no-repeat;
+    background-size:100% 100%, 100% 100%;
+    background-image:
+      linear-gradient(to bottom, transparent 0%, transparent 81.03%, #fff 81.03%, #fff 100%),
+      linear-gradient(165deg, #232b34, var(--ink) 82%);
+  }
+  /* Edge (rib) thickness caps its OWN border-radius at depth/2 — a true
+     semicircle cap at exactly half the strip's thickness, same fix used
+     on the delivery fan-cards' walls: any more and a flat shoulder is
+     left that the face's larger 20px corner curves away from, showing
+     as a stray light seam right where edge meets face. */
+  /* Position-shift + rotate-around-own-centre (no translateZ) — same
+     construction as the delivery fan-cards' .fan-card__wall. Pre-
+     shifting the box by half its own width via left/right, then rotating
+     around the untouched default centre origin, lands that centre
+     exactly on the face's edge — rotation then sweeps the strip
+     symmetrically into z:[-depth/2, +depth/2], correctly bridging from
+     the open back to .card-face's own plane at translateZ(depth/2). */
+  .conveyor.is-live .card-edge-left,
+  .conveyor.is-live .card-edge-right{
+    display:block;
+    position:absolute;
+    top:0; height:100%;
+    width:var(--depth);
+    background:linear-gradient(165deg, #232b34, var(--ink) 82%);
+    opacity:var(--op, 1);
+    transition:opacity .7s cubic-bezier(.65,0,.35,1);
+  }
+  /* .card-face is square-cornered (border-radius:0) by request, so the
+     edges need no corner treatment at all — the depth/2 outer-corner cap
+     and square-inner-corner split that lived here were only there to
+     match a rounded face; a plain rectangle needs neither. If the face
+     ever goes back to rounded corners, reinstate: outer corners (away
+     from .card-face) at depth/2, inner corners (butted against the
+     face) square — mixing curved-both-sides carved a wedge-shaped notch
+     out of the seam at different radii (edge's vs face's), exposing the
+     page background ("ребро прерывается перед закруглением"). */
+  .conveyor.is-live .card-edge-left{
+    left:calc(var(--depth) / -2);
+    transform:rotateY(-90deg);
+  }
+  .conveyor.is-live .card-edge-right{
+    right:calc(var(--depth) / -2);
+    transform:rotateY(90deg);
+  }
+  /* Only the edge facing back toward the centre card is ever shown — a
+     card sitting to the RIGHT of centre exposes its LEFT edge (that's
+     the side turned toward the viewer as it rotates away), and mirrored
+     for the left side; the centre card itself is seen face-on, so ships
+     with neither. JS sets .side-left/.side-right, never both. */
+  .conveyor.is-live .conveyor-card:not(.side-right) .card-edge-left{ display:none; }
+  .conveyor.is-live .conveyor-card:not(.side-left) .card-edge-right{ display:none; }
+
+  /* Top/bottom close the box into a full 3D frame (4 walls, matching the
+     delivery fan-cards' construction) rather than just two side slivers.
+     Unlike left/right these don't alternate by which side of centre the
+     card sits on — both always show, at every distance from the active
+     card, including the active card itself (see the layoutConveyor
+     comment in script.js for why there's no discrete hide any more). */
+  .conveyor.is-live .card-edge-top,
+  .conveyor.is-live .card-edge-bottom{
+    display:block;
+    position:absolute;
+    left:0; width:100%;
+    height:var(--depth);
+    background:linear-gradient(165deg, #232b34, var(--ink) 82%);
+    opacity:var(--op, 1);
+    transition:opacity .7s cubic-bezier(.65,0,.35,1);
+  }
+  .conveyor.is-live .card-edge-top{
+    top:calc(var(--depth) / -2);
+    transform:rotateX(90deg);
+  }
+  .conveyor.is-live .card-edge-bottom{
+    bottom:calc(var(--depth) / -2);
+    transform:rotateX(-90deg);
+  }
+  /* No .is-active display:none here (there used to be one) — top/bottom
+     are each a single-axis rotateX(90/-90deg), same shape as left/right's
+     single-axis rotateY, so they collapse to the same genuinely-zero
+     screen width once the card's own rotateY animates down to 0 — no
+     discrete hide needed, and adding one back would reintroduce the
+     same jitter described in the layoutConveyor comment (script.js). */
+
+  /* Rib/edge photo continuation — same idea as the delivery fan-cards'
+     photo-on-walls (.fan-card__wall), but pixel-matched to this card's
+     OWN crop instead of the old "background-size:cover, positioned left/
+     right" approximation — that version sized the edge's photo slice
+     independently of the face's, so the two crops landed at different
+     zoom levels (a narrow 18px strip forced into "cover" zooms in far
+     more than the ~350px-wide face does) and never actually lined up;
+     on some photos (busy/high-contrast ones, e.g. cards 01/05) the
+     mismatch was blatant, and a stray dark region landing right at the
+     seam read as an unrelated black stripe between face and edge
+     ("между ними проходит чёрная полоса").
+
+     Fix: give both crops the SAME scale by matching background-size to
+     the FACE's own object-fit:cover height (not cover on the edge's own
+     tiny box), then compute background-position so the edge shows the
+     exact slice adjacent to whatever the face is already showing.
+
+     .conveyor-card__photo's height (top-zone box + its 1.8rem top
+     bleed) is fixed regardless of viewport — only WIDTH is
+     clamp/vw-based — because .conveyor-card's own height comes from the
+     560px min-height floor, never a percentage: content-box height
+     560-28.8(padding-top) = 531.2 (card-face carries no border — it was
+     removed for the "line on white" fix below, so don't add 2×border
+     back into this sum); body flex-basis:20% of that = 106.24; top zone
+     = 531.2-106.24 = 424.96; plus the 28.8 bleed = 453.76px photo-zone
+     height, ALWAYS — also exactly 453.76/560 = 81.03% of the card's own
+     height, which is why that's the split point used everywhere below
+     (edges' white cut-off, the backing's white cut-off). Since our
+     source photos are all 1447x1087 and the photo zone is always
+     narrower than it is tall relative to that image, object-fit:cover
+     on the face is always height-driven: scale = 453.76/1087 = .41744,
+     giving a rendered width of 1447*.41744 = 604.04px (604.04/2 =
+     302.02, used below). The face centres that 604.04px-wide render
+     within its own (variable) --card-w, so background-size:auto
+     453.76px here reproduces the same scale, and background-position-x
+     picks the slice immediately outside that centred window — left edge
+     one --depth further left, right edge starting right where the
+     face's window ends. Recompute 453.76/604.04/302.02/81.03% if
+     photo-zone height, card height, card-face's padding/border, or
+     body's 20% ever change; recompute 1447/1087-derived figures too if
+     a differently-sized photo set replaces these. */
+  .conveyor.is-live .card-edge-left,
+  .conveyor.is-live .card-edge-right{
+    background-color:#1c2027;
+    background-repeat:no-repeat, no-repeat, no-repeat;
+    background-size:100% 100%, 100% 100%, auto 453.76px;
+    background-position-y:center, center, top;
+    background-image:
+      linear-gradient(to bottom, transparent 0%, transparent 81.03%, #fff 81.03%, #fff 100%),
+      linear-gradient(to right, rgba(0,0,0,.55), rgba(0,0,0,.1)),
+      var(--edge-photo);
+  }
+  .conveyor.is-live .card-edge-left{
+    background-position-x:center, center, calc(-302.02px + (var(--card-w) / 2) + var(--depth));
+  }
+  .conveyor.is-live .card-edge-right{
+    background-position-x:center, center, calc(-302.02px - (var(--card-w) / 2));
+  }
+  /* Right edge is lit from the opposite side, mirror the shading gradient. */
+  .conveyor.is-live .card-edge-right{
+    background-image:
+      linear-gradient(to bottom, transparent 0%, transparent 81.03%, #fff 81.03%, #fff 100%),
+      linear-gradient(to left, rgba(0,0,0,.55), rgba(0,0,0,.1)),
+      var(--edge-photo);
+  }
+  /* Top wall sits entirely inside the photo zone (the face bleeds to the
+     card's top edge, see .conveyor-card__photo), so it's a plain photo
+     reveal, no white-split gradient needed. Bottom wall sits entirely
+     inside the white text zone instead — solid white, no photo at all,
+     matching .conveyor-card__body's own background exactly. */
+  .conveyor.is-live .card-edge-top{
+    background-color:#1c2027;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:top center;
+    background-image:linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.05)), var(--edge-photo);
+  }
+  .conveyor.is-live .card-edge-bottom{
+    background-color:#fff;
+    background-image:linear-gradient(to bottom, rgba(0,0,0,.06), transparent);
+  }
+  .conveyor-card[data-index="0"]{ --edge-photo:url(images/process-01-request.jpg); }
+  .conveyor-card[data-index="1"]{ --edge-photo:url(images/process-02-calc.jpg); }
+  .conveyor-card[data-index="2"]{ --edge-photo:url(images/process-03-purchase.jpg); }
+  .conveyor-card[data-index="3"]{ --edge-photo:url(images/process-04-check.jpg); }
+  .conveyor-card[data-index="4"]{ --edge-photo:url(images/process-05-consolidation.jpg); }
+  .conveyor-card[data-index="5"]{ --edge-photo:url(images/process-06-customs.jpg); }
+  .conveyor-card[data-index="6"]{ --edge-photo:url(images/process-07-delivery.jpg); }
+  .conveyor-card[data-index="7"]{ --edge-photo:url(images/process-08-receiving.jpg); }
+
+  .conveyor.is-live .conveyor__arrow{
+    display:flex; align-items:center; justify-content:center;
+    width:44px; height:44px; flex-shrink:0;
+    border-radius:50%; border:1px solid var(--line-strong); background:var(--surface);
+    color:var(--ink); cursor:pointer;
+    transition:border-color .2s var(--ease-out), color .2s var(--ease-out), background .2s var(--ease-out);
+  }
+  .conveyor.is-live .conveyor__arrow svg{ width:19px; height:19px; }
+  .conveyor.is-live .conveyor__arrow:hover{ border-color:var(--accent); color:var(--accent); }
+
+  .conveyor.is-live .conveyor__dots{
+    position:absolute; left:50%; bottom:-2.4rem; transform:translateX(-50%);
+    display:flex; justify-content:center; gap:.45rem;
+  }
+  .conveyor__dots button{
+    width:26px; height:26px; border-radius:50%; border:1px solid var(--line-strong);
+    background:var(--surface); color:var(--ink-faint);
+    font-family:var(--font-mono); font-size:.7rem;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .3s, border-color .3s, color .3s, transform .3s;
+    cursor:pointer;
+  }
+  .conveyor__dots button.is-active{ background:var(--accent); border-color:var(--accent); color:#fff; transform:scale(1.15); }
+  .conveyor.is-live{ padding-bottom:3.2rem; }
+  @media (max-width: 940px){ .conveyor.is-live .conveyor__dots{ bottom:-2rem; } }
 
   /* ================= CONTROL ================= */
-  .control-grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem, 5vw, 4rem); align-items:center; }
-  .control-list{ display:flex; flex-direction:column; padding:.2rem 1.5rem; border-radius:var(--r-panel-lg); }
-  .control-item{ display:flex; gap:1.1rem; padding-block:1rem; border-bottom:1px solid var(--line); position:relative; z-index:1; }
+  .control-grid{ display:grid; grid-template-columns:1fr 1.15fr; gap:clamp(2rem, 5vw, 4rem); align-items:center; }
+  .control-list{ display:flex; flex-direction:column; }
+  .control-item{ display:flex; gap:1.1rem; padding-block:1rem; border-bottom:1px solid var(--line); }
   .control-item:first-child{ padding-top:1rem; }
   .control-item:last-child{ border-bottom:none; }
-  .control-item svg{ width:21px; height:21px; color:var(--amber-bright); flex-shrink:0; margin-top:.15rem; }
+  .control-item svg{ width:21px; height:21px; color:var(--accent); flex-shrink:0; margin-top:.15rem; }
   .control-item h3{ font-size:.98rem; color:var(--ink); margin-bottom:.3rem; }
   .control-item p{ font-size:.88rem; color:var(--ink-dim); line-height:1.55; }
 
-  .route-track{ padding:clamp(1.3rem,2.2vw,1.9rem); border-radius:var(--r-panel-lg); }
-  .route-track-label{ font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:1.1rem; position:relative; z-index:1; }
-  .route-point{ position:relative; display:flex; align-items:flex-start; gap:1rem; padding-bottom:1.6rem; z-index:1; }
-  .route-point:last-child{ padding-bottom:0; }
-  .route-point::before{ content:""; position:absolute; left:12px; top:30px; bottom:2px; border-left:1px dashed var(--line-strong); }
-  .route-point:last-child::before{ display:none; }
-  .route-dot{ width:26px; height:26px; flex-shrink:0; border:1px solid var(--violet-bright); border-radius:50%; background:var(--bg-1); display:flex; align-items:center; justify-content:center; z-index:1; }
-  .route-dot i{ width:8px; height:8px; border-radius:50%; background:var(--violet-bright); display:block; }
-  .route-point--arrival .route-dot{ background:linear-gradient(135deg,var(--amber-bright),var(--violet-bright)); border-color:transparent; }
-  .route-point--arrival .route-dot i{ background:#0c0a14; }
-  .route-point strong{ display:block; font-family:var(--font-display); font-size:1.1rem; color:var(--ink); font-weight:400; }
-  .route-point span{ display:block; margin-top:.3rem; font-size:.8rem; color:var(--ink-faint); }
-  @media (max-width: 860px){ .control-grid{ grid-template-columns:1fr; } }
+  .control-map{ position:relative; width:100%; aspect-ratio:1000/620; }
+  .control-map__img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:contain; object-position:center 62%;
+    /* Tight contour glow (not a diffusing haze) so the cutout PNG reads as
+       floating rather than pasted flat: drop-shadow follows the image's
+       own alpha silhouette, unlike box-shadow/radial-gradient which would
+       be a plain rectangle/blob behind it. A darker rim right at the edge
+       (rgba ink) gives it definition against the light page, since it's
+       barely visible without one; the bright rim stays but its blur was
+       cut way down (16px -> 3px) so it hugs the silhouette instead of
+       pooling around it like a puddle. */
+    filter:
+      drop-shadow(0 0 1.5px rgba(24,21,15,.28))
+      drop-shadow(0 0 3px rgba(255,255,255,.6))
+      drop-shadow(0 18px 30px rgba(24,21,15,.16));
+  }
+
+  /* Labels only — no drawn dot/line of our own; they sit just under the
+     map artwork's own brightest hub dots (coordinates below were read off
+     the source PNG's pixel geometry, then re-projected through this box's
+     letterboxed object-fit:contain so they land on the same dots as
+     rendered, not just in the raw image). */
+  .control-map__pin{ position:absolute; transform:translate(-50%, 14px); }
+  .control-map__pin--start{ left:29.3%; top:37.73%; } /* Россия hub */
+  .control-map__pin--mid{ left:49.27%; top:44.28%; } /* brightest waypoint dot on the route */
+  .control-map__pin--end{ left:70.4%; top:61.78%; } /* Гуанчжоу hub */
+  .control-map__pin-label{
+    font-family:var(--font-mono); font-size:.68rem; letter-spacing:.03em; white-space:nowrap;
+    color:var(--ink); background:rgba(248,246,242,.88); padding:.2em .6em; border-radius:var(--r-pill);
+    border:1px solid var(--line); box-shadow:0 4px 10px rgba(24,21,15,.08);
+  }
+  .control-map__pin-label--mid{ color:var(--ink-dim); font-size:.62rem; }
+
+  .control-map__card{
+    position:absolute; display:flex; align-items:flex-start; gap:.7rem; width:clamp(150px, 15vw, 190px);
+    padding:.85rem .95rem; background:rgba(255,255,255,.82); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.7); border-radius:16px;
+    box-shadow:0 18px 34px -16px rgba(24,21,15,.22), 0 2px 4px rgba(24,21,15,.06);
+  }
+  .control-map__card svg{ width:19px; height:19px; color:var(--accent); flex-shrink:0; margin-top:.1rem; }
+  .control-map__card strong{ display:block; font-size:.8rem; color:var(--ink); line-height:1.3; margin-bottom:.2rem; }
+  .control-map__card span{ display:block; font-size:.72rem; color:var(--ink-dim); line-height:1.4; }
+  .control-map__card--2{ right:3%; top:-9%; }
+  .control-map__card--3{ left:3%; top:-9%; }
+  .control-map__card--4{ right:3%; top:78%; }
+
+  @media (max-width: 940px){
+    .control-grid{ grid-template-columns:1fr; }
+    .control-visual{ order:-1; }
+    .control-map__card{ display:none; }
+  }
 
   /* ================= ABOUT ================= */
   .about-grid{ display:grid; grid-template-columns:1.2fr .8fr; gap:clamp(2rem, 5vw, 4rem); align-items:start; }
-  .about-copy{ padding:clamp(1.6rem, 3vw, 2.4rem); border-radius:var(--r-panel-lg); }
-  .about-copy p{ color:var(--ink-dim); font-size:.98rem; line-height:1.75; position:relative; z-index:1; }
+  .about-copy p{ color:var(--ink-dim); font-size:.98rem; line-height:1.75; }
   .about-copy p + p{ margin-top:1rem; }
-  .about-copy .stat-row{ margin-top:2rem; max-width:none; position:relative; z-index:1; }
+  .about-copy .stat-row{ margin-top:2rem; max-width:none; }
   @media (max-width: 860px){ .about-grid{ grid-template-columns:1fr; } }
 
   /* ================= REVIEWS ================= */
-  .review-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:1.2rem; }
-  .review-card{ padding:1.5rem 1.3rem; display:flex; flex-direction:column; gap:1rem; }
-  .review-quote-icon{ color:var(--amber-bright); width:24px; height:24px; position:relative; z-index:1; }
-  .review-stars{ display:flex; gap:.2rem; position:relative; z-index:1; }
-  .review-stars svg{ width:14px; height:14px; color:var(--amber-bright); }
-  .review-text{ font-size:.92rem; color:var(--ink-dim); line-height:1.6; flex:1; position:relative; z-index:1; }
-  .review-footer{ border-top:1px solid var(--line); padding-top:1rem; position:relative; z-index:1; }
-  .review-footer strong{ display:block; color:var(--ink); font-size:.92rem; }
-  .review-footer span{ display:block; margin-top:.2rem; font-size:.8rem; color:var(--ink-faint); }
-  @media (max-width: 860px){ .review-grid{ grid-template-columns:1fr; } }
+  /* Star rating + quote text, shared by the reviews-card carousel below —
+     kept as their own small classes since nothing else on the page needs
+     them. */
+  .review-stars{ display:flex; gap:.2rem; }
+  .review-stars svg{ width:14px; height:14px; color:var(--accent); }
+  .review-text{ margin-top:1rem; font-size:.98rem; color:var(--ink-dim); line-height:1.7; }
+
+  /* Redesigned reviews-page hero, on request ("в референсе для страницы
+     Отзывы... можешь сделать то же самое?"). Two columns: copy + trust
+     signals on the left, a decorative globe/network graphic behind a
+     single-card testimonial carousel on the right. The reference's stat
+     numbers (500+/98%/4,9) are used as given; the carousel and its counter
+     are wired to the site's actual 3 written testimonials (not the
+     reference's fabricated "1/12") -- avatars are initials, not stock
+     photos standing in for real named clients. */
+  /* align-items:start, not center — the right column got taller as its
+     card-stack clearance grew (nav margin-top, top padding for the
+     header), so center-aligning against it was pushing the left text
+     down instead of starting level with the cards, on request ("левый
+     текст... должен начинаться примерно по одной линии высоты с
+     карточками"). */
+  .reviews-hero__grid{ display:grid; grid-template-columns:1.05fr 1fr; gap:clamp(2.5rem, 6vw, 5rem); align-items:start; }
+  .reviews-hero__copy p{ margin-top:1.2rem; color:var(--ink-dim); font-size:1.02rem; max-width:52ch; line-height:1.7; }
+
+  .reviews-stats{ margin-top:clamp(1.75rem, 3.5vw, 2.5rem); display:grid; grid-template-columns:repeat(3, auto); gap:clamp(1.25rem, 3vw, 2.25rem); border-top:1px solid var(--line); padding-top:1.4rem; }
+  .reviews-stat{ display:flex; align-items:flex-start; gap:.6rem; }
+  .reviews-stat__icon{ flex-shrink:0; width:34px; height:34px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:var(--accent-wash); color:var(--accent); }
+  .reviews-stat__icon svg{ width:17px; height:17px; }
+  .reviews-stat strong{ display:block; font-family:var(--font-mono); font-size:1.15rem; color:var(--ink); font-variant-numeric:tabular-nums; }
+  .reviews-stat div span{ display:block; margin-top:.1rem; font-size:.78rem; color:var(--ink-faint); line-height:1.3; max-width:14ch; }
+  @media (max-width: 560px){ .reviews-stats{ grid-template-columns:1fr 1fr; } }
+
+  .reviews-avatars{ margin-top:clamp(1.75rem, 3.5vw, 2.25rem); display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+  .reviews-avatar{
+    width:44px; height:44px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+    font-family:var(--font-mono); font-size:.8rem; font-weight:600; color:#fff;
+    background:var(--av-bg, var(--accent));
+    border:2px solid var(--bg);
+    box-shadow:0 2px 6px rgba(24,21,15,.15);
+  }
+  .reviews-avatar img{ width:100%; height:100%; object-fit:cover; }
+  .reviews-avatars .reviews-avatar + .reviews-avatar{ margin-left:-.9rem; }
+  /* "+N" chip standing in for the rest of the client photos, on request
+     ("увеличить количество кружков... фото дам позже") — an outlined
+     rather than solid-filled circle so it reads as a count, not an
+     (invented) 6th person's initials. */
+  .reviews-avatar--more{ background:var(--bg-alt); color:var(--ink-dim); border-color:var(--bg); font-size:.72rem; }
+  .reviews-note{ margin-left:.4rem; font-family:'Caveat', cursive; font-size:1.5rem; font-weight:600; color:var(--accent); transform:rotate(-3deg); }
+  .reviews-carousel__more{ margin-left:1.1rem; display:flex; flex-direction:column; align-items:flex-end; font-family:'Caveat', cursive; font-size:1.3rem; font-weight:600; line-height:1.05; color:var(--accent); text-align:right; transform:rotate(-4deg); }
+  .reviews-carousel__more svg{ width:34px; height:17px; margin-top:.2rem; }
+
+  /* Extra top clearance, on request ("задняя карточка ложится под
+     верхнюю плашку сайта и обрезается") — measured: the up-shifted back
+     card's top edge landed 5px ABOVE the sticky header's own bottom edge,
+     so the header (much higher z-index) was clipping its corner. */
+  .reviews-hero__visual{ position:relative; display:flex; align-items:center; justify-content:center; min-height:520px; padding-top:2rem; }
+
+  .reviews-carousel{ position:relative; z-index:1; width:min(100%, 420px); }
+  .reviews-carousel__stack{ position:relative; }
+  /* Fanned card stack, on request ("почему не использовано расположение
+     карточек как на референсе? затемнение? их расположение,
+     перекрытие?") — first pass swapped cards via display:none/block,
+     which dropped the reference's most recognizable detail: the next 1-2
+     testimonials peeking out from behind the active card, offset and
+     dimmed. All 3 cards now stay mounted; JS sets data-pos to each card's
+     distance from the active one (0 = front) and these rules do the fan
+     placement + darkening purely from that one number, so it keeps
+     working if a 4th/5th review is ever added later.
+     The front card (pos 0) is the only one in normal flow -- that's what
+     gives .reviews-carousel__stack its height, with no JS measurement
+     needed. Back cards are absolutely positioned to the same top-left
+     corner (stack itself is the positioned ancestor) purely for the
+     peeking-fan effect; being position:absolute they don't affect the
+     stack's height even when a review's text runs longer than the front
+     card's.
+
+     Fixed height (not just min-height) on request ("лента... прыгает то
+     вверх то вниз... на неё залезают карточки") — with only the front
+     card driving the stack's height, switching to a review with a
+     longer/shorter text changed that height every click, so the nav row
+     below it (prev/dots/next) visibly jumped up and down each time. A
+     fixed height stops that AND stops a back card whose own text is
+     longer than the current front card's from bleeding out past the
+     stack's bottom edge into the nav row — overflow:hidden below clips
+     that excess instead (sized generously against the longest of the 12
+     review texts, so none of them actually get clipped in practice; it's
+     only a safety clamp). */
+  .reviews-card{
+    height:500px;
+    padding:1.75rem 1.6rem;
+    overflow:hidden;
+    transition:transform .45s var(--ease-spring), opacity .35s var(--ease-out);
+  }
+  .reviews-card[data-pos="0"]{ position:relative; transform:none; z-index:12; }
+  /* Offsets are % of the card's OWN box (translate% is relative to the
+     element itself, so these scale automatically with the responsive
+     card width instead of needing a px value re-tuned per breakpoint).
+     Sized against the reference at roughly a quarter of the card's own
+     width/height so a real slice of the card behind — photo, name, a
+     line of text — actually reads, not just a sliver of edge (measured
+     off the reference: the right-hand card's exposed strip is close to
+     a quarter of the card width). */
+  .reviews-card[data-pos="1"]{ position:absolute; top:0; left:0; width:100%; transform:translate(24%, -6%) rotate(5deg) scale(.98); z-index:11; pointer-events:none; }
+  .reviews-card[data-pos="2"]{ position:absolute; top:0; left:0; width:100%; transform:translate(-20%, 10%) rotate(-5deg) scale(.97); z-index:10; pointer-events:none; }
+  .reviews-card[data-pos]:not([data-pos="0"]):not([data-pos="1"]):not([data-pos="2"]){ position:absolute; top:0; left:0; width:100%; opacity:0; pointer-events:none; }
+  /* Darkening on the back cards, on request ("затемнение идёт не на всю
+     карточку сразу, а частично, от большего к меньшему") — a warm-tinted
+     gradient overlay (not a flat filter:brightness on the whole card)
+     that's strongest near the middle, where the card is mostly hidden
+     under the one in front, and fades to nothing toward the sliver that
+     actually peeks out — that sliver is the "3-4 cards, but readable"
+     part of the reference, so it shouldn't be dimmed at all. Direction
+     points from each card's hidden side toward its own peeking corner. */
+  .reviews-card[data-pos]::after{
+    content:""; position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+  }
+  .reviews-card[data-pos="1"]::after{ background:linear-gradient(to top right, rgba(74,56,26,.28), transparent 68%); }
+  .reviews-card[data-pos="2"]::after{ background:linear-gradient(to bottom left, rgba(74,56,26,.38), transparent 68%); }
+  .reviews-card__head{ display:flex; align-items:flex-start; gap:.8rem; }
+  .reviews-card__avatar{
+    flex-shrink:0; width:48px; height:48px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+    font-family:var(--font-mono); font-size:.85rem; font-weight:600; color:#fff;
+    background:var(--av-bg, var(--accent));
+  }
+  .reviews-card__avatar img{ width:100%; height:100%; object-fit:cover; }
+  .reviews-card__head strong{ display:block; font-size:.98rem; color:var(--ink); }
+  .reviews-card__head div span{ display:block; margin-top:.15rem; font-size:.78rem; color:var(--ink-faint); line-height:1.4; }
+  .reviews-card__quote{ margin-left:auto; flex-shrink:0; width:22px; height:22px; color:var(--accent-wash); }
+  .reviews-card .review-stars{ margin-top:1rem; }
+  .reviews-card__tags{ margin-top:1.2rem; padding-top:1rem; border-top:1px solid var(--line); display:flex; flex-wrap:wrap; gap:.6rem; }
+  .reviews-card__tags span{ display:inline-flex; align-items:center; gap:.35rem; font-size:.76rem; color:var(--ink-dim); background:var(--bg-alt); border-radius:var(--r-pill); padding:.35em .75em; }
+  .reviews-card__tags svg{ width:14px; height:14px; color:var(--accent); flex-shrink:0; }
+  .reviews-card__status{ color:#3f6b3f !important; background:rgba(63,107,63,.1) !important; }
+  .reviews-card__status svg{ color:#3f6b3f !important; }
+
+  /* Cleared past the rotated back cards' own bounding box, not just the
+     stack's — on request ("линия с перелистыванием... я просил сделать
+     так чтобы они не конфликтовали"). rotate(±5deg) on a 500px-tall card
+     makes its axis-aligned bottom edge stick out ~60px past the
+     (unrotated) stack's own bottom, so the previous 1.5rem gap (measured:
+     the back card's real bottom edge landed 35px INTO the nav row) was
+     nowhere near enough — this margin is sized against that measured
+     overflow, not guessed. */
+  .reviews-carousel__nav{ margin-top:4.75rem; display:flex; align-items:center; gap:.9rem; }
+  .reviews-carousel__arrow{
+    width:38px; height:38px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%; border:1px solid var(--line-strong);
+    background:var(--surface); color:var(--ink);
+    cursor:pointer;
+    transition:border-color .25s var(--ease-out), color .25s var(--ease-out);
+  }
+  .reviews-carousel__arrow svg{ width:16px; height:16px; }
+  .reviews-carousel__arrow:hover{ border-color:var(--accent); color:var(--accent); }
+  /* One row, on request ("точки в 2 ряда... сделай их в один ряд") — 12
+     dots at 5px + a small gap fit the nav row in one line comfortably;
+     nowrap so a future 13th/14th review doesn't silently wrap into an
+     uneven second row. */
+  .reviews-carousel__dots{ display:flex; flex-wrap:nowrap; gap:.3rem; }
+  .reviews-carousel__dots button{ width:5px; height:5px; flex-shrink:0; padding:0; border-radius:50%; border:1px solid var(--line-strong); background:transparent; cursor:pointer; transition:background .2s var(--ease-out), border-color .2s var(--ease-out), transform .2s var(--ease-out); }
+  .reviews-carousel__dots button.is-active{ background:var(--accent); border-color:var(--accent); transform:scale(1.3); }
+  .reviews-carousel__count{ margin-left:auto; font-family:var(--font-mono); font-size:.78rem; color:var(--ink-faint); }
+
+  @media (max-width: 980px){
+    .reviews-hero__grid{ grid-template-columns:1fr; }
+    .reviews-hero__visual{ min-height:0; margin-top:1rem; }
+    .reviews-carousel{ width:100%; max-width:460px; }
+  }
+  @media (max-width: 480px){ .reviews-carousel__count{ display:none; } }
 
   /* ================= CONTACT ================= */
   .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,5vw,4rem); }
   .contact-info h2{ font-size:var(--fs-h2); margin-top:.6rem; margin-bottom:1.2rem; }
   .contact-info .block-intro p{ color:var(--ink-dim); max-width:42ch; }
   .contact-info .block-intro{ margin-bottom:1.5rem; }
-  .contacts-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:1rem; margin-bottom:1.1rem; }
+  .contacts-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:1.5rem; margin-bottom:1.1rem; }
   .contact-card{ padding:1rem; display:flex; flex-direction:column; gap:.5rem; border-radius:14px; }
-  .contact-card svg{ width:18px; height:18px; color:var(--amber-bright); position:relative; z-index:1; }
-  .contact-card h3{ font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); font-family:var(--font-mono); font-weight:500; position:relative; z-index:1; }
-  .contact-card strong{ font-weight:700; color:var(--ink); font-size:.96rem; position:relative; z-index:1; }
-  .contact-card p{ font-size:.8rem; color:var(--ink-dim); position:relative; z-index:1; }
+  .contact-card svg{ width:18px; height:18px; color:var(--accent); }
+  .contact-card h3{ font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); font-family:var(--font-mono); font-weight:500; }
+  .contact-card strong{ font-weight:700; color:var(--ink); font-size:.96rem; }
+  .contact-card p{ font-size:.8rem; color:var(--ink-dim); }
   @media (max-width: 480px){ .contacts-grid{ grid-template-columns:1fr; } }
 
   form.request-form{ padding:clamp(1.3rem,2.4vw,1.9rem); display:flex; flex-direction:column; gap:1rem; border-radius:18px; }
-  .field{ display:flex; flex-direction:column; gap:.4rem; position:relative; z-index:1; }
+  .field{ display:flex; flex-direction:column; gap:.4rem; }
   .field label{ font-family:var(--font-mono); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); }
   .field input, .field textarea, .field select{
-    background:rgba(255,255,255,.04);
-    border:1px solid var(--line);
+    background:var(--bg);
+    border:1px solid var(--line-strong);
     color:var(--ink);
     padding:.8rem 1rem;
     font-family:var(--font-body);
@@ -518,21 +1794,157 @@
     transition:border-color .2s var(--ease-out), background .2s var(--ease-out);
   }
   .field textarea{ resize:vertical; min-height:90px; }
-  .field input:focus, .field textarea:focus, .field select:focus{ outline:none; border-color:var(--violet-bright); background:rgba(109,91,255,.06); }
+  .field input:focus, .field textarea:focus, .field select:focus{ outline:none; border-color:var(--accent); background:var(--surface); }
   .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
-  .form-note{ font-size:.78rem; color:var(--ink-faint); line-height:1.6; position:relative; z-index:1; }
-  .form-status{ display:none; font-family:var(--font-mono); font-size:.85rem; color:var(--amber-bright); border:1px solid rgba(255,154,82,.35); border-radius:10px; padding:.9rem 1rem; position:relative; z-index:1; }
+  .form-note{ font-size:.78rem; color:var(--ink-faint); line-height:1.6; }
+  .form-status{ display:none; font-family:var(--font-mono); font-size:.85rem; color:var(--accent); border:1px solid rgba(138,101,24,.3); border-radius:10px; padding:.9rem 1rem; background:var(--accent-wash); }
   .form-status.is-visible{ display:block; }
   @media (max-width: 860px){ .contact-grid{ grid-template-columns:1fr; } }
   @media (max-width: 480px){ .field-row{ grid-template-columns:1fr; } }
 
-  /* ================= FOOTER ================= */
-  .site-footer{ background:transparent; border-top:1px solid var(--line); padding-block:2.4rem; }
-  .footer-inner{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1.5rem; }
+  /* ================= FOOTER =================
+     The one dark band on an otherwise all-light page — mirrors the
+     reference's black CTA-into-footer close, with its own oversized,
+     barely-there wordmark sitting behind the legal row. */
+  .site-footer{
+    background:var(--ink);
+    color:var(--ink-invert-dim);
+    padding-block:2.6rem 0;
+    overflow:hidden;
+    position:relative;
+  }
+  .footer-inner{ display:grid; grid-template-columns:auto 1fr 1fr auto; gap:2.4rem; align-items:start; }
   .footer-brand{ display:flex; align-items:center; gap:.7rem; }
-  .footer-brand-logo{ width:26px; height:26px; object-fit:contain; }
-  .footer-brand span{ font-family:var(--font-display); color:var(--ink-dim); font-size:1rem; }
-  .footer-links{ display:flex; gap:1.6rem; flex-wrap:wrap; }
-  .footer-links a{ font-size:.85rem; color:var(--ink-faint); transition:color .2s var(--ease-out); }
-  .footer-links a:hover{ color:var(--violet-bright); }
-  .footer-bottom{ margin-top:1.8rem; padding-top:1.4rem; border-top:1px solid var(--line); display:flex; flex-wrap:wrap; justify-content:space-between; gap:1rem; font-size:.78rem; color:var(--ink-faint); }
+  .footer-brand-logo{ width:26px; height:26px; object-fit:contain; filter:brightness(0) invert(1); }
+  .footer-brand span{ font-family:var(--font-display); color:var(--ink-invert); font-size:1rem; }
+  .footer-brand-col{ display:flex; flex-direction:column; gap:.7rem; }
+  .footer-tagline{ font-size:.82rem; color:var(--ink-invert-dim); max-width:20ch; line-height:1.4; }
+  .footer-nav-col{ display:flex; flex-direction:column; gap:.65rem; }
+  .footer-nav-col strong{ font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.4); font-weight:600; margin-bottom:.15rem; }
+  .footer-nav-col a{ font-size:.85rem; color:var(--ink-invert-dim); transition:color .2s var(--ease-out); }
+  .footer-nav-col a:hover{ color:var(--ink-invert); }
+  .footer-contact-col{ display:flex; flex-direction:column; align-items:flex-end; gap:1.1rem; }
+  .footer-phone{ display:flex; align-items:center; gap:.6rem; color:var(--ink-invert); text-align:left; }
+  .footer-phone svg{ width:16px; height:16px; color:var(--accent-bright); flex-shrink:0; }
+  .footer-phone strong{ display:block; font-size:.9rem; font-weight:600; }
+  .footer-phone small{ display:block; margin-top:.1rem; font-size:.72rem; color:var(--ink-invert-dim); font-weight:400; }
+  .footer-social{ display:flex; gap:.6rem; }
+  .footer-social a{ width:34px; height:34px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:rgba(255,255,255,.08); color:var(--ink-invert); transition:background .2s var(--ease-out); }
+  .footer-social a:hover{ background:rgba(255,255,255,.18); }
+  .footer-social svg{ width:15px; height:15px; }
+  .footer-bottom{ margin-top:1.8rem; padding-top:1.4rem; border-top:1px solid rgba(255,255,255,.12); display:flex; flex-wrap:wrap; justify-content:space-between; gap:1rem; font-size:.78rem; position:relative; z-index:1; }
+  .footer-legal{ display:flex; gap:1.4rem; }
+  .footer-legal a{ color:var(--ink-invert-dim); transition:color .2s var(--ease-out); }
+  .footer-legal a:hover{ color:var(--ink-invert); }
+  @media (max-width: 860px){
+    .footer-inner{ grid-template-columns:1fr 1fr; row-gap:2rem; }
+    .footer-contact-col{ grid-column:1 / -1; flex-direction:row; align-items:center; justify-content:space-between; }
+  }
+  @media (max-width: 560px){
+    .footer-inner{ grid-template-columns:1fr; }
+    .footer-contact-col{ flex-direction:column; align-items:flex-start; gap:1rem; }
+    .footer-phone{ text-align:left; }
+  }
+  .footer-word{
+    display:block;
+    margin-top:1.6rem;
+    font-family:var(--font-display);
+    font-weight:500;
+    font-size:clamp(4.5rem, 15vw, 11rem);
+    line-height:.78;
+    color:rgba(255,255,255,.06);
+    white-space:nowrap;
+    overflow:hidden;
+    text-align:center;
+    user-select:none;
+    pointer-events:none;
+  }
+
+  /* ================= REVIEWS PAGE — CONTINUATION =================
+     Everything below the reviews hero, added on request ("положил в
+     референс продолжение страницы (отзывы)... сделай тоже самое").
+     The reference's "trusted by" strip used real trademarked brand logos
+     (Zara, adidas, Samsung, L'Oréal, Mi, Bosch) — those aren't reproduced
+     here since this site has no relationship with those companies;
+     instead the strip reuses this page's own fictional clients (from the
+     case studies below) plus a few more invented ones, styled as plain
+     wordmarks. */
+  .partners-strip{ padding-block:1.5rem; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .partners-strip__inner{ display:flex; flex-wrap:wrap; align-items:center; gap:1.6rem 2.8rem; }
+  .partners-strip__logo{ font-family:var(--font-display); font-size:1.05rem; color:var(--ink-faint); opacity:.72; letter-spacing:.01em; }
+  .partners-strip__logo--bold{ font-family:var(--font-body); font-weight:800; letter-spacing:.03em; text-transform:uppercase; font-size:.9rem; }
+  .partners-strip__logo--serif{ font-style:italic; }
+  @media (max-width: 560px){ .partners-strip__inner{ gap:1.1rem 1.6rem; } .partners-strip__logo{ font-size:.92rem; } }
+
+  /* ---- section-head variant: paragraph stays left, under the heading,
+     with the link-arrow taking the right-hand slot .section-head normally
+     reserves for a short right-aligned blurb (used by the services /
+     delivery / process heads elsewhere). */
+  .section-head--split > div > p{ text-align:left; max-width:46ch; margin-top:.7rem; color:var(--ink-dim); font-size:.95rem; }
+  .section-head--split .link-arrow{ margin-bottom:.3rem; }
+
+  /* ---- Cases ---- */
+  .cases-grid{ margin-top:clamp(1.8rem, 3.5vw, 2.6rem); display:grid; grid-template-columns:repeat(3, 1fr); gap:1.6rem; }
+  .case-card{ position:relative; width:100%; max-width:420px; height:500px; margin-inline:auto; background:#faf5ea; border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden; box-shadow:var(--card-shadow); display:flex; flex-direction:column; transition:transform .35s var(--ease-spring), box-shadow .35s var(--ease-spring); }
+  .case-card:hover{ transform:translateY(-4px); box-shadow:var(--card-shadow-hover); }
+  .case-card::after{ content:""; position:absolute; inset:0; z-index:0; pointer-events:none; border-radius:inherit; }
+  .case-card--shade-a::after{ background:radial-gradient(ellipse 100% 85% at 4% 2%, rgba(74,56,26,.09), transparent 80%); }
+  .case-card--shade-b::after{ background:radial-gradient(ellipse 70% 95% at 0% 48%, rgba(74,56,26,.08), transparent 78%); }
+  .case-card--shade-c::after{ background:radial-gradient(ellipse 95% 80% at 98% 100%, rgba(74,56,26,.085), transparent 80%); }
+  .case-card__photo{ position:relative; height:60px; flex-shrink:0; }
+  .case-card__badge{ position:absolute; top:14px; left:14px; z-index:2; width:36px; height:36px; display:flex; align-items:center; justify-content:center; border-radius:50%; border:1px solid rgba(255,255,255,.4); background:rgba(20,16,10,.4); color:#fff; }
+  .case-card__badge svg{ width:17px; height:17px; }
+  .case-card__body{ position:relative; z-index:1; padding:1rem 1.4rem 1.4rem; display:flex; flex-direction:column; flex:1; }
+  .case-card__head{ display:flex; align-items:flex-start; gap:.9rem; }
+  .case-card__head > div{ max-width:11rem; }
+  .case-card__num{ font-family:var(--font-display); font-weight:600; font-size:2.1rem; line-height:1; color:var(--accent); flex-shrink:0; }
+  .case-card__head strong{ display:block; min-height:2.6em; font-family:var(--font-display); font-weight:600; font-size:1.05rem; color:var(--ink); line-height:1.3; }
+  .case-card__route{ display:block; margin-top:.45rem; font-size:.8rem; color:var(--ink-faint); }
+  .case-card__stats{ display:flex; gap:1.3rem; padding-block:.9rem; margin-top:.7rem; border-top:1px solid var(--line); }
+  .case-card__stats span{ display:inline-flex; align-items:center; gap:.4rem; font-size:.85rem; color:var(--ink-dim); }
+  .case-card__stats svg{ width:16px; height:16px; color:var(--accent); flex-shrink:0; }
+  .case-card__client{ font-size:.92rem; color:var(--ink); }
+  .case-card__client strong{ font-weight:600; }
+  .case-card__desc{ margin-top:.35rem; font-size:.86rem; color:var(--ink-dim); line-height:1.55; }
+  .case-card .btn{ margin-top:1.2rem; align-self:flex-start; }
+  @media (max-width: 940px){ .cases-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width: 640px){ .cases-grid{ grid-template-columns:1fr; } }
+
+  /* ---- "Почему нам доверяют" — 4-column trust row, same divider
+     pattern as .stats-panel (border-left dividers collapsing to
+     border-top as columns stack) but icon + two lines of text instead of
+     a number. */
+  .trust-row{ margin-top:1.4rem; display:grid; grid-template-columns:repeat(4, 1fr); border-top:1px solid var(--line); padding-top:1.7rem; }
+  .trust-item{ display:flex; align-items:center; gap:.9rem; padding-inline:1.3rem; border-left:1px solid var(--line); }
+  .trust-item:first-child{ border-left:none; padding-left:0; }
+  .trust-item__icon{ flex-shrink:0; color:var(--accent); }
+  .trust-item__icon svg{ width:26px; height:26px; }
+  .trust-item strong{ display:block; font-size:.94rem; color:var(--ink); font-weight:600; }
+  .trust-item span{ display:block; margin-top:.15rem; font-size:.82rem; color:var(--ink-dim); line-height:1.35; }
+  @media (max-width: 940px){
+    .trust-row{ grid-template-columns:repeat(2, 1fr); row-gap:1.5rem; }
+    .trust-item:nth-child(2n+1){ border-left:none; padding-left:0; }
+  }
+  @media (max-width: 560px){
+    .trust-row{ grid-template-columns:1fr; }
+    .trust-item{ border-left:none; padding-left:0; border-top:1px solid var(--line); padding-top:1.2rem; }
+    .trust-item:first-child{ border-top:none; padding-top:0; }
+  }
+
+  /* ---- dark "start working with us" band — same photo+gradient
+     technique as .counter-band, left-aligned copy instead of centered,
+     plus a watermark brand mark on the right (hidden on narrow screens). */
+  .story-cta{ position:relative; overflow:hidden; border-radius:var(--r-panel-lg); background:var(--surface); border:1px solid var(--line); box-shadow:var(--card-shadow), var(--card-shine); }
+  .story-cta__inner{ position:relative; z-index:1; display:grid; grid-template-columns:1fr auto; align-items:center; gap:2rem; padding:clamp(2.2rem, 5vw, 3.6rem) clamp(1.6rem, 4vw, 3.2rem); }
+  .story-cta__copy h2{ margin-top:.8rem; font-size:var(--fs-h2); color:var(--ink); }
+  .story-cta__copy h2 em{ font-style:italic; color:var(--accent); }
+  .story-cta__copy p{ margin-top:.9rem; max-width:38ch; color:var(--ink-dim); }
+  .story-cta__actions{ margin-top:1.7rem; display:flex; flex-wrap:wrap; align-items:center; gap:1.6rem; }
+  .story-cta__bullets{ display:flex; flex-wrap:wrap; gap:1.2rem; }
+  .story-cta__bullets span{ display:inline-flex; align-items:center; gap:.45rem; font-size:.82rem; color:var(--ink-dim); }
+  .story-cta__bullets svg{ width:15px; height:15px; color:var(--accent); }
+  .story-cta__mark{ text-align:right; }
+  .story-cta__mark img{ width:32px; height:32px; object-fit:contain; margin-left:auto; }
+  .story-cta__mark strong{ display:block; margin-top:.6rem; font-family:var(--font-display); font-size:1.25rem; letter-spacing:.02em; color:var(--accent); white-space:nowrap; }
+  .story-cta__mark span{ display:block; margin-top:.35rem; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); max-width:17ch; margin-left:auto; line-height:1.4; }
+  @media (max-width: 860px){ .story-cta__inner{ grid-template-columns:1fr; } .story-cta__mark{ display:none; } }

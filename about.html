@@ -8,23 +8,10 @@
 <link rel="icon" href="images/logo/dragon-logo-32.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<div class="bg-fixed" aria-hidden="true">
-  <div class="bg-base"></div>
-  <div class="bg-sky"></div>
-  <div class="bg-horizon"></div>
-  <div class="bg-beam bg-beam--1"></div>
-  <div class="bg-beam bg-beam--2"></div>
-  <div class="bg-plane-wrap">
-    <div class="bg-plane-glow"></div>
-    <div class="bg-plane"></div>
-    <div class="bg-sheen"></div>
-  </div>
-</div>
 
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
@@ -73,6 +60,16 @@
     </div>
   </div>
 </header>
+
+<div class="video-modal" id="heroVideoModal" aria-hidden="true">
+  <div class="video-modal__backdrop" data-video-close></div>
+  <div class="video-modal__panel" role="dialog" aria-modal="true" aria-label="Видео">
+    <button type="button" class="video-modal__close" data-video-close aria-label="Закрыть видео">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <img src="images/office-employee.jpg" alt="" class="video-modal__media">
+  </div>
+</div>
 
 <main>
 
@@ -145,6 +142,20 @@
     </div>
   </section>
 
+  <!-- ================= VIDEO ================= -->
+  <section class="section-pad">
+    <div class="container">
+      <div class="about-video reveal">
+        <div class="about-video__panel">
+          <img src="images/office-employee.jpg" alt="" class="about-video__media">
+          <button type="button" class="hero-map__play" data-video-open aria-label="Воспроизвести видео" aria-haspopup="dialog">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= CTA ================= -->
   <section class="section-pad">
     <div class="container">
@@ -161,25 +172,44 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-inner">
-      <a href="index.html" class="footer-brand">
-        <img src="images/logo/dragon-logo-256.png" alt="" class="footer-brand-logo">
-        <span>Дракон Трейд</span>
-      </a>
-      <nav class="footer-links" aria-label="Ссылки в подвале">
+      <div class="footer-brand-col">
+        <a href="index.html" class="footer-brand">
+          <img src="images/logo/dragon-logo-256.png" alt="" class="footer-brand-logo">
+          <span>Дракон Трейд</span>
+        </a>
+        <p class="footer-tagline">Надёжные поставки больших возможностей</p>
+      </div>
+      <nav class="footer-nav-col" aria-label="Услуги">
+        <strong>Услуги</strong>
         <a href="index.html#services">Услуги</a>
         <a href="index.html#delivery">Доставка</a>
         <a href="index.html#process">Как работаем</a>
         <a href="index.html#control">Контроль</a>
+      </nav>
+      <nav class="footer-nav-col" aria-label="О компании">
+        <strong>О компании</strong>
         <a href="about.html">О нас</a>
         <a href="reviews.html">Отзывы</a>
         <a href="index.html#contact">Контакты</a>
       </nav>
+      <div class="footer-contact-col">
+        <a class="footer-phone" href="tel:+79990000000">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0 8.3 6.7 15 15 15l3-3.6-5.4-2.2-1.6 2.1a12 12 0 0 1-7.3-7.3l2.1-1.6L7.6 2 4 5Z"/></svg>
+          <span><strong>+7 (999) 000-00-00</strong><small>Ежедневно 9:00–20:00</small></span>
+        </a>
+        <div class="footer-social">
+          <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 3.5 2.7 10.8c-1 .4-1 1.8.1 2.1l4.6 1.4 1.8 5.6c.3.9 1.4 1.1 2 .4l2.6-2.8 4.8 3.6c.8.6 2 .2 2.2-.8l3-16.3c.2-1.1-.9-2-1.9-1.6ZM8.6 14l-1.1-3.5 9.8-6-7 6.9c-.3.3-.5.6-.6 1l-1.1 1.6Z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.4A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 0 1 7 12.5l-.3.5.9 3.2-3.3-.9-.5.3A8.2 8.2 0 1 1 12 3.8Zm-3.1 4.3c-.2 0-.5 0-.7.3-.2.2-.9.9-.9 2.1s.9 2.4 1.1 2.6c.1.1 1.8 2.9 4.5 3.9 2.2.9 2.6.7 3.1.6.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.4-.3l-1.8-.9c-.2-.1-.4-.1-.6.1l-.7 1c-.1.2-.3.2-.5.1-.6-.3-1.6-.9-2.4-1.6-.7-.6-1.2-1.5-1.4-1.7-.1-.2 0-.4.1-.5l.5-.6c.1-.2.1-.4 0-.5l-.8-1.9c-.1-.2-.3-.4-.6-.4Z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 8.4s-.2-1.5-.8-2.2c-.8-.8-1.7-.8-2.1-.9C16.4 5 12 5 12 5h0s-4.4 0-7.1.3c-.4 0-1.3 0-2.1.9C2.2 6.9 2 8.4 2 8.4S1.8 10.1 1.8 11.8v1.3C1.8 14.8 2 16.5 2 16.5s.2 1.5.8 2.2c.8.9 1.8.9 2.3 1 1.7.2 6.9.3 6.9.3s4.4 0 7.1-.3c.4 0 1.3 0 2.1-.9.6-.7.8-2.2.8-2.2s.2-1.7.2-3.4v-1.3c0-1.7-.2-3.4-.2-3.4ZM9.8 14.6V9l5.8 2.8-5.8 2.8Z"/></svg></a>
+        </div>
+      </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Дракон Трейд. Карго-логистика и таможенное оформление грузов из Китая.</span>
-      <span>ИНН 0000000000 · ОГРН 0000000000000</span>
+      <span class="footer-legal"><a href="#">Политика конфиденциальности</a><a href="#">Пользовательское соглашение</a></span>
     </div>
   </div>
+  <span class="footer-word" aria-hidden="true">Дракон Трейд</span>
 </footer>
 
 <script src="script.js"></script>
