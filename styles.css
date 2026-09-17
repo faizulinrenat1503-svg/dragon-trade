@@ -628,6 +628,19 @@
     .work-card{ position:static !important; left:auto !important; top:auto !important; width:100% !important; max-width:420px; margin-bottom:2.5rem; }
     .work-card:last-child{ margin-bottom:0; }
   }
+  /* Mobile: the 6 tall (3:5) work-card photos stack into ~600px-tall
+     images one after another — far too much scrolling and visual weight
+     on a phone, on request ("слишком много огромных картинок... можно
+     их вообще убрать"). Photos dropped entirely on small screens; the
+     heading+text becomes a plain divided list so it reads cleanly
+     without any image at all. */
+  @media (max-width: 560px){
+    .work-card__media{ display:none; }
+    .work-card{ margin-bottom:0; padding-block:1.3rem; border-top:1px solid var(--line); }
+    .work-card:first-child{ border-top:none; padding-top:0; }
+    .work-card:last-child{ padding-bottom:0; }
+    .work-card__caption{ margin-top:0; }
+  }
 
   /* ================= DELIVERY — 3D perspective "fan" of REAL box geometry =====
      Per reference boards: 4 tall cards standing in a shallow arc,
@@ -1111,6 +1124,28 @@
     .fan-card:hover{ transform:translateY(-5px) !important; }
   }
   @media (max-width: 560px){ .fan-card{ flex:1 1 100%; } }
+  /* Mobile: these 4 cards are pure photo with the heading/description
+     overlaid on a heavy dark scrim (rgba(10,12,18,.92) at the bottom) —
+     exactly the "затемнения очень сильно мешают" complaint, plus each
+     photo stretches to ~590px tall on a 390px-wide phone. On request
+     ("можно их вообще убрать"), the photo (and its scrim) is dropped
+     entirely on small screens; the card becomes a plain light card
+     matching the rest of the site, with the day-count/icon/heading/text
+     back in normal dark-on-light flow instead of overlaid on an image. */
+  @media (max-width: 560px){
+    .fan-card__img{ display:none; }
+    .fan-card__photo::before{ display:none; }
+    .fan-card--1::before, .fan-card--2::before, .fan-card--3::before, .fan-card--4::before{ display:none; }
+    .fan-card--photo-overlay .fan-card__photo{ position:static; aspect-ratio:auto; background:none; }
+    .fan-card--photo-overlay .fan-card__face{ aspect-ratio:auto; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-card); box-shadow:var(--card-shadow); }
+    .fan-card__days{ position:static; display:flex; align-items:baseline; gap:.4rem; padding:1.1rem 1.1rem 0; }
+    .fan-card__days .num{ color:var(--accent); text-shadow:none; }
+    .fan-card__days .unit{ color:var(--ink-faint); }
+    .fan-card--photo-overlay .fan-card__info{ position:static; background:none; padding:.6rem 1.1rem 1.3rem; }
+    .fan-card--photo-overlay .fan-card__info h3{ color:var(--ink); }
+    .fan-card--photo-overlay .fan-card__info p{ color:var(--ink-dim); }
+    .fan-card--photo-overlay .fan-card__icon{ border-color:var(--line-strong); background:var(--accent-wash); color:var(--accent); }
+  }
 
   /* ================= COUNTER BAND ================= */
   .counter-band{ position:relative; padding-block:clamp(3rem, 6vw, 5rem); background-size:cover; background-position:center; overflow:hidden; }
@@ -1222,6 +1257,21 @@
   .conveyor__cards{ flex:1; min-width:0; display:grid; grid-template-columns:repeat(4, 1fr); gap:1.1rem; outline:none; }
   @media (max-width: 940px){ .conveyor__cards{ grid-template-columns:repeat(2, 1fr); } }
   @media (max-width: 560px){ .conveyor__cards{ grid-template-columns:1fr; gap:1.2rem; } }
+  /* Mobile: 8 cards, each with a ~450px-tall photo (min-height:560px
+     total), stacked in a single column — by far the biggest source of
+     "too many huge images" on the page. The 3D carousel JS only runs
+     above 760px anyway, so below 560px these already render as a plain
+     static list — dropping the photo just turns each into a compact
+     bordered text card (number + heading + description), on request
+     ("можно их вообще убрать"). */
+  @media (max-width: 560px){
+    .conveyor-card{ min-height:0; }
+    .conveyor-card__top{ display:none; }
+    .card-face{ padding:0; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-panel-lg); }
+    .conveyor-card__body{ flex:1 1 auto; margin:0; padding:1.4rem 1.4rem 1.6rem; background:none; }
+    .conveyor-card__num{ position:static; display:block; margin-bottom:.3rem; font-size:1.4rem; color:var(--accent); }
+    .conveyor-card__body h3{ padding-right:0; }
+  }
 
   .conveyor__arrow{ display:none; }
   .conveyor__dots{ display:none; }
