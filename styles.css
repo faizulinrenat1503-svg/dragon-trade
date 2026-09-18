@@ -641,6 +641,7 @@
     .work-card{ margin-bottom:0; padding-block:1.1rem; border-top:1px solid var(--line); display:flex; gap:.9rem; align-items:flex-start; }
     .work-card:first-child{ border-top:none; padding-top:0; }
     .work-card:last-child{ padding-bottom:0; }
+    .work-card::before{ display:none; }
     .work-card__media{ flex-shrink:0; width:64px; aspect-ratio:1/1; border-radius:14px; border:none; box-shadow:none; }
     .work-card__media img{ height:100%; }
     .work-card__caption{ margin-top:0; }
