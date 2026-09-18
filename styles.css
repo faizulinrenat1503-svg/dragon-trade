@@ -21,7 +21,7 @@
     --surface:#ffffff;
     --ink:#18150f;
     --ink-dim:#5b564c;
-    --ink-faint:#948d7e;
+    --ink-faint:#7a7266;
     --line:rgba(24,21,15,.10);
     --line-strong:rgba(24,21,15,.18);
     --accent:#8a6518;
@@ -173,8 +173,10 @@
   .nav-toggle svg{ width:18px; height:18px; }
 
   .mobile-panel{ display:none; max-height:0; overflow:hidden; background:rgba(248,246,242,.98); border-bottom:1px solid var(--line); transition:max-height .35s var(--ease-out); }
-  .mobile-panel .container{ padding-block:1rem; display:flex; flex-direction:column; gap:1.1rem; }
+  .mobile-panel .container{ padding-block:.5rem; display:flex; flex-direction:column; gap:.3rem; }
   .mobile-panel a{ font-size:1.02rem; color:var(--ink-dim); }
+  .mobile-panel .container > a:not(.phone-link):not(.btn){ display:block; padding-block:.7rem; }
+  .mobile-panel .phone-link, .mobile-panel .btn{ margin-top:.5rem; }
   .site-header.nav-open .mobile-panel{ max-height:460px; }
 
   @media (max-width: 1180px){
@@ -1801,7 +1803,7 @@
      overflow, not guessed. */
   .reviews-carousel__nav{ margin-top:4.75rem; display:flex; align-items:center; gap:.9rem; }
   .reviews-carousel__arrow{
-    width:38px; height:38px; flex-shrink:0;
+    width:44px; height:44px; flex-shrink:0;
     display:flex; align-items:center; justify-content:center;
     border-radius:50%; border:1px solid var(--line-strong);
     background:var(--surface); color:var(--ink);
@@ -1815,7 +1817,13 @@
      nowrap so a future 13th/14th review doesn't silently wrap into an
      uneven second row. */
   .reviews-carousel__dots{ display:flex; flex-wrap:nowrap; gap:.3rem; }
-  .reviews-carousel__dots button{ width:5px; height:5px; flex-shrink:0; padding:0; border-radius:50%; border:1px solid var(--line-strong); background:transparent; cursor:pointer; transition:background .2s var(--ease-out), border-color .2s var(--ease-out), transform .2s var(--ease-out); }
+  /* Visible dot stays 5px (12 of them must fit one row, per an earlier
+     request not to let them wrap to 2 rows) but the tappable area is
+     grown via an invisible ::before — position:absolute takes it out of
+     flow, so it doesn't push neighbouring dots or force a wrap, while
+     still making each dot easier to hit than a bare 5px box. */
+  .reviews-carousel__dots button{ position:relative; width:5px; height:5px; flex-shrink:0; padding:0; border-radius:50%; border:1px solid var(--line-strong); background:transparent; cursor:pointer; transition:background .2s var(--ease-out), border-color .2s var(--ease-out), transform .2s var(--ease-out); }
+  .reviews-carousel__dots button::before{ content:""; position:absolute; inset:-11px; }
   .reviews-carousel__dots button.is-active{ background:var(--accent); border-color:var(--accent); transform:scale(1.3); }
   .reviews-carousel__count{ margin-left:auto; font-family:var(--font-mono); font-size:.78rem; color:var(--ink-faint); }
 
