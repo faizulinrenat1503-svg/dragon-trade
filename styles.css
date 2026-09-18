@@ -642,7 +642,7 @@
     .work-card:first-child{ border-top:none; padding-top:0; }
     .work-card:last-child{ padding-bottom:0; }
     .work-card::before{ display:none; }
-    .work-card__media{ flex-shrink:0; width:64px; aspect-ratio:1/1; border-radius:14px; border:none; box-shadow:none; }
+    .work-card__media{ flex-shrink:0; width:104px; aspect-ratio:1/1; border-radius:14px; border:none; box-shadow:none; }
     .work-card__media img{ height:100%; }
     .work-card__caption{ margin-top:0; }
   }
